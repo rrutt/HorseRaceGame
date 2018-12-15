@@ -35,6 +35,7 @@ Native executable program written in Free Pascal.
 - <https://www.freepascal.org/docs.var>
 - <https://lazarus-ccr.sourceforge.io/fpcdoc/user/user.html>
 - <https://castle-engine.io/modern_pascal_introduction.html>
+- <http://newpascal.org/assets/modern_pascal_introduction.html>
 - <https://castle-engine.io/>
 - <http://www.zengl.org/>
 - <http://wiki.lazarus.freepascal.org/ZenGL>
@@ -50,4 +51,9 @@ Native executable program written in Free Pascal.
 - <http://wiki.freepascal.org/Graphics_libraries>
 - <https://www.pascalgamedevelopment.com/content.php>
 - <http://www.pascalgamer.com/>
+- <http://wiki.freepascal.org/fcl-json>
+- <https://stackoverflow.com/questions/12647236/using-freepascal-lazarus-json-libraries>
+- <http://forum.lazarus-ide.org/index.php?topic=14452.0>
+- <http://lazplanet.blogspot.com/2014/09/a-simple-json-parsing-example.html>
+- <https://news.ycombinator.com/item?id=15490345>
 

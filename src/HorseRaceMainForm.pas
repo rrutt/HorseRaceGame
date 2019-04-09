@@ -27,7 +27,8 @@ end;
 var
   MainForm: THorseRaceMainForm;
   TheTrack: THorseRaceTrack;
-  Counter: Integer;
+  Counter: Integer = 0;
+  ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
 implementation
 
@@ -35,8 +36,6 @@ implementation
 
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
   begin
-    Counter := 0;
-
     TheTrack := THorseRaceTrack.Create(Self);
     TheTrack.Height := 400;
     TheTrack.Width := 500;
@@ -44,6 +43,7 @@ implementation
     TheTrack.Left := 0;
     TheTrack.Parent := Self;
     TheTrack.DoubleBuffered := True;
+    TheTrack.LoadImages(ResourceDirectory);
 
     Timer1.Interval := 1000; // milliseconds
     Timer1.Enabled := True;

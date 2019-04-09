@@ -11,6 +11,7 @@ type
   THorseRaceTrack = class(TCustomControl)
 
   public
+    procedure LoadImages(ResourceDirectory: UTF8String);
     procedure DrawRandomBlock();
     procedure EraseBackground(DC: HDC); override;
     procedure Paint; override;
@@ -19,8 +20,15 @@ type
 var
   RandomX: Integer;
   RandomY: Integer;
+  HorseImage: TPortableNetworkGraphic;
 
 implementation
+
+  procedure THorseRaceTrack.LoadImages(ResourceDirectory: UTF8String);
+  begin
+    HorseImage := TPortableNetworkGraphic.Create;
+    HorseImage.LoadFromFile(ResourceDirectory + 'Horse-and-Jockey-2-transparent.png');
+  end;
 
   procedure THorseRaceTrack.DrawRandomBlock();
   begin
@@ -60,6 +68,8 @@ implementation
           Bitmap.Canvas.Rectangle(Round((x - 1) * Width / 8), Round((y - 1) * Height / 8),
             Round(x * Width / 8), Round(y * Height / 8));
         end;
+
+      Bitmap.Canvas.Draw(Round((RandomX - 1) * Width / 8), Round((RandomY - 1) * Height / 8), HorseImage);
 
       Canvas.Draw(0, 0, Bitmap);
     finally

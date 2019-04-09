@@ -1,0 +1,26 @@
+object HorseRaceMainForm: THorseRaceMainForm
+  Left = 340
+  Height = 507
+  Top = 143
+  Width = 708
+  Caption = 'Horse Race'
+  ClientHeight = 507
+  ClientWidth = 708
+  OnCreate = FormCreate
+  LCLVersion = '2.0.0.4'
+  object Label1: TLabel
+    Left = 88
+    Height = 21
+    Top = 472
+    Width = 46
+    Caption = 'Label1'
+    Font.Height = -16
+    ParentColor = False
+    ParentFont = False
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    left = 16
+    top = 464
+  end
+end

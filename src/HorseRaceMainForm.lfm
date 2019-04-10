@@ -9,15 +9,35 @@ object HorseRaceMainForm: THorseRaceMainForm
   OnCreate = FormCreate
   LCLVersion = '2.0.0.4'
   object Label1: TLabel
-    Left = 80
+    Left = 248
     Height = 21
-    Top = 574
+    Top = 576
     Width = 46
     Anchors = [akLeft, akBottom]
     Caption = 'Label1'
     Font.Height = -16
     ParentColor = False
     ParentFont = False
+  end
+  object LoadHorses: TButton
+    Left = 24
+    Height = 25
+    Top = 576
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Load Horses'
+    OnClick = LoadHorsesClick
+    TabOrder = 0
+  end
+  object StartRace: TButton
+    Left = 128
+    Height = 25
+    Top = 576
+    Width = 75
+    Anchors = [akLeft, akBottom]
+    Caption = 'Start Race'
+    OnClick = StartRaceClick
+    TabOrder = 1
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

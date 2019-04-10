@@ -27,6 +27,7 @@ type
       RaceIsOver: boolean;
     public
       procedure Initialize();
+      procedure LoadHorses();
       procedure MoveHorses();
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
@@ -57,15 +58,26 @@ implementation
       HorseHeight := horse.Height;
       HorseWidth := horse.Width;
       HorseImage[i] := horse;
-      HorsePosition[i] := 0;
       HorseSpeed[i] := HORSE_SPEED;
-      HorseFinishOrder[i] := 0;
     end;
 
     Self.Height := HorseHeight * (1 + HORSE_COUNT);
     Self.Width := TrackSurfaceImage.Width;
 
     FinishLine := Self.Width - HorseWidth;
+    FinishedHorseCount := 0;
+    RaceIsOver := false;
+  end;
+
+  procedure THorseRaceTrack.LoadHorses();
+  var
+    i: integer;
+  begin
+    for i := 1 to HORSE_COUNT do begin
+      HorsePosition[i] := 0;
+      HorseFinishOrder[i] := 0;
+    end;
+
     FinishedHorseCount := 0;
     RaceIsOver := false;
   end;

@@ -13,10 +13,14 @@ type
   { THorseRaceMainForm }
 
   THorseRaceMainForm = class(TForm)
+    StartRace: TButton;
+    LoadHorses: TButton;
     Label1: TLabel;
     Timer1: TTimer;
 
     procedure FormCreate(Sender: TObject);
+    procedure LoadHorsesClick(Sender: TObject);
+    procedure StartRaceClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   end;
 
@@ -32,6 +36,11 @@ implementation
     TimeInMilliseconds: Int64 = 0;
     //ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
+  procedure LoadHorsesForNewRace();
+  begin
+
+  end;
+
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
   begin
     TheTrack := THorseRaceTrack.Create(Self);
@@ -40,11 +49,30 @@ implementation
     TheTrack.Left := 0;
     TheTrack.Parent := Self;
     TheTrack.Initialize();
+    TheTrack.LoadHorses();
     TheTrack.DoubleBuffered := True;
 
     Self.Width := TheTrack.Width;
 
     Timer1.Interval := 10; // milliseconds
+    Timer1.Enabled := False;
+
+    LoadHorses.Enabled := False;
+    StartRace.Enabled := True
+  end;
+
+  procedure THorseRaceMainForm.LoadHorsesClick(Sender: TObject);
+  begin
+    LoadHorses.Enabled := False;
+    StartRace.Enabled := True;
+
+    TheTrack.LoadHorses();
+    TheTrack.Paint();
+  end;
+
+  procedure THorseRaceMainForm.StartRaceClick(Sender: TObject);
+  begin
+    StartRace.Enabled := False;
     Timer1.Enabled := True;
   end;
 
@@ -57,6 +85,7 @@ implementation
     TheTrack.Paint();
 
     if (TheTrack.RaceOver) then begin
+      LoadHorses.Enabled := True;
       Timer1.Enabled := false;
     end;
   end;

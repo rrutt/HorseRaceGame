@@ -20,15 +20,17 @@ type
     procedure Timer1Timer(Sender: TObject);
   end;
 
-var
-  MainForm: THorseRaceMainForm;
-  TheTrack: THorseRaceTrack;
-  Counter: Integer = 0;
-  ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
+  var
+    MainForm: THorseRaceMainForm;
 
 implementation
 
 {$R *.lfm}
+
+  var
+    TheTrack: THorseRaceTrack;
+    TimeInMilliseconds: Int64 = 0;
+    //ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
   begin
@@ -40,14 +42,14 @@ implementation
     TheTrack.Initialize();
     TheTrack.DoubleBuffered := True;
 
-    Timer1.Interval := 1000; // milliseconds
+    Timer1.Interval := 10; // milliseconds
     Timer1.Enabled := True;
   end;
 
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);
   begin
-    Inc(Counter);
-    Label1.Caption := Format('%ds',[Counter]);
+    TimeInMilliseconds += Timer1.Interval;
+    Label1.Caption := Format('%d ms', [TimeInMilliseconds]);
 
     TheTrack.MoveHorses();
     TheTrack.Paint();

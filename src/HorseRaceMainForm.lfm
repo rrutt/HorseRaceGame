@@ -1,7 +1,7 @@
 object HorseRaceMainForm: THorseRaceMainForm
-  Left = 340
+  Left = 283
   Height = 618
-  Top = 143
+  Top = 145
   Width = 708
   Caption = 'Horse Race'
   ClientHeight = 618

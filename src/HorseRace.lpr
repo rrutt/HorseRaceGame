@@ -16,10 +16,6 @@ uses
   HorseRaceTrack
   ;
 
-var
-  dirRes    : UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
-  time      : Integer;
-
 begin
   Randomize;
 

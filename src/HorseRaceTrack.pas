@@ -21,13 +21,16 @@ var
   RandomX: Integer;
   RandomY: Integer;
   HorseImage: TPortableNetworkGraphic;
+  //HorseImage: TBitmap;
 
 implementation
 
   procedure THorseRaceTrack.LoadImages(ResourceDirectory: UTF8String);
   begin
     HorseImage := TPortableNetworkGraphic.Create;
-    HorseImage.LoadFromFile(ResourceDirectory + 'Horse-and-Jockey-2-transparent.png');
+    //HorseImage.LoadFromFile(ResourceDirectory + 'Horse-and-Jockey-2-transparent.png');
+    //HorseImage := TBitmap.Create;
+    HorseImage.LoadFromResourceName(HInstance, 'HORSE_1');
   end;
 
   procedure THorseRaceTrack.DrawRandomBlock();

@@ -29,6 +29,7 @@ Native executable program written in Free Pascal.
 ### 2-D Graphics Approach
 
 - **Create a custom control which draws itself:** <http://wiki.freepascal.org/Developing_with_Graphics#Working_with_TLazIntfImage.2C_TRawImage_and_TLazCanvas>
+- **Include images files in executable:** <https://forum.lazarus.freepascal.org/index.php?topic=35848.0>
 
 ### Useful software links
 

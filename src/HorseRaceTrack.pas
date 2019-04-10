@@ -9,8 +9,8 @@ uses
 
 const
   HORSE_COUNT = 10;
-  HORSE_SPEED = 2;
-  HORSE_START_POSITION = 10;
+  HORSE_SPEED = 2.0;
+  HORSE_START_POSITION = 10.0;
 
 type
   THorseRaceTrack = class(TCustomControl)
@@ -21,12 +21,13 @@ type
       GateWidth: integer;
       ToteImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
       HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
-      HorsePosition: array[1..HORSE_COUNT] of integer;
-      HorseSpeed: array[1..HORSE_COUNT] of integer;
+      HorsePosition: array[1..HORSE_COUNT] of single;
+      HorseSpeed: array[1..HORSE_COUNT] of single;
       HorseFinishOrder: array[1..HORSE_COUNT] of integer;
       HorseHeight: integer;
       HorseWidth: integer;
       FinishLine: integer;
+      FinishPosition: integer;
       FinishedHorseCount: integer;
       RaceHasStarted: boolean;
       RaceIsOver: boolean;
@@ -78,6 +79,7 @@ implementation
     Self.Width := TrackSurfaceImage.Width;
 
     FinishLine := Self.Width - HorseWidth;
+    FinishPosition := FinishLine - HorseWidth;
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
@@ -104,14 +106,17 @@ implementation
     RaceHasStarted := true;
 
     for i := 1 to HORSE_COUNT do begin
-      HorsePosition[i] += Round(HorseSpeed[i] * Random);
-      if (HorsePosition[i] > FinishLine) then begin
-        HorsePosition[i] := FinishLine;
+      HorsePosition[i] += HorseSpeed[i] * Random;
+      if (HorsePosition[i] > FinishPosition) then begin
         if (HorseFinishOrder[i]  = 0) then begin
           Inc(FinishedHorseCount);
           HorseFinishOrder[i] := FinishedHorseCount;
           RaceIsOver := (FinishedHorseCount >= HORSE_COUNT);
         end;
+      end;
+
+      if (HorsePosition[i] > FinishLine) then begin
+        HorsePosition[i] := FinishLine;
       end;
     end;
   end;
@@ -135,7 +140,7 @@ implementation
       Bitmap.Canvas.Draw(0, 0, TrackSurfaceImage);
 
       for i := 1 to HORSE_COUNT do begin
-        Bitmap.Canvas.Draw(HorsePosition[i], (i - 1) * HorseHeight, HorseImage[i]);
+        Bitmap.Canvas.Draw(Round(HorsePosition[i]), (i - 1) * HorseHeight, HorseImage[i]);
 
         if (RaceHasStarted) then begin
           Bitmap.Canvas.Draw(0, (i - 1) * HorseHeight, GateOpenImage);

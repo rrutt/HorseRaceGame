@@ -1,18 +1,19 @@
 object HorseRaceMainForm: THorseRaceMainForm
   Left = 340
-  Height = 507
+  Height = 618
   Top = 143
   Width = 708
   Caption = 'Horse Race'
-  ClientHeight = 507
+  ClientHeight = 618
   ClientWidth = 708
   OnCreate = FormCreate
   LCLVersion = '2.0.0.4'
   object Label1: TLabel
-    Left = 88
+    Left = 80
     Height = 21
-    Top = 472
+    Top = 574
     Width = 46
+    Anchors = [akLeft, akBottom]
     Caption = 'Label1'
     Font.Height = -16
     ParentColor = False
@@ -20,7 +21,7 @@ object HorseRaceMainForm: THorseRaceMainForm
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    left = 16
-    top = 464
+    left = 8
+    top = 8
   end
 end

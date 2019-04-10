@@ -7,36 +7,52 @@ interface
 uses
   Classes, SysUtils, Controls, Graphics, LCLType;
 
+const
+  HORSE_COUNT = 10;
+
 type
   THorseRaceTrack = class(TCustomControl)
-
   public
-    procedure LoadImages(ResourceDirectory: UTF8String);
-    procedure DrawRandomBlock();
+    procedure Initialize();
+    procedure MoveHorses();
     procedure EraseBackground(DC: HDC); override;
     procedure Paint; override;
   end;
 
-var
-  RandomX: Integer;
-  RandomY: Integer;
-  HorseImage: TPortableNetworkGraphic;
-  //HorseImage: TBitmap;
-
 implementation
 
-  procedure THorseRaceTrack.LoadImages(ResourceDirectory: UTF8String);
+  var
+    RandomX: Integer;
+    RandomY: Integer;
+    HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
+    HorsePosition: array[1..HORSE_COUNT] of integer;
+
+  procedure THorseRaceTrack.Initialize();
+  var
+    i: integer;
+    horseName: string;
+    image: TPortableNetworkGraphic;
+    totalHeight: integer = 0;
   begin
-    HorseImage := TPortableNetworkGraphic.Create;
-    //HorseImage.LoadFromFile(ResourceDirectory + 'Horse-and-Jockey-2-transparent.png');
-    //HorseImage := TBitmap.Create;
-    HorseImage.LoadFromResourceName(HInstance, 'HORSE_1');
+    for i := 1 to HORSE_COUNT do begin
+      horseName := Format('HORSE_%d', [i]);
+      image := TPortableNetworkGraphic.Create;
+      image.LoadFromResourceName(HInstance, horseName);
+      totalHeight += image.Height;
+      HorseImage[i] := image;
+      HorsePosition[i] := 0;
+    end;
+
+    Self.Height := totalHeight;
   end;
 
-  procedure THorseRaceTrack.DrawRandomBlock();
+  procedure THorseRaceTrack.MoveHorses();
+  var
+    i: integer;
   begin
-    RandomX := Random(8);
-    RandomY := Random(8);
+    for i := 1 to HORSE_COUNT do begin
+      HorsePosition[i] := Random(Width);
+    end;
   end;
 
   procedure THorseRaceTrack.EraseBackground(DC: HDC);
@@ -62,17 +78,15 @@ implementation
 
       // Draws squares
       Bitmap.Canvas.Pen.Color := clBlack;
-      for x := 1 to 8 do
-        for y := 1 to 8 do begin
-          if ((x = RandomX) and (y = RandomY)) then
-          begin
-            Bitmap.Canvas.Pen.Color := clRed;
-          end;
-          Bitmap.Canvas.Rectangle(Round((x - 1) * Width / 8), Round((y - 1) * Height / 8),
-            Round(x * Width / 8), Round(y * Height / 8));
-        end;
+      for y := 1 to HORSE_COUNT do begin
+        Bitmap.Canvas.Rectangle(
+          0, Round((y - 1) * Height / HORSE_COUNT),
+          Width, Round(y * Height / HORSE_COUNT));
+      end;
 
-      Bitmap.Canvas.Draw(Round((RandomX - 1) * Width / 8), Round((RandomY - 1) * Height / 8), HorseImage);
+      for y := 1 to HORSE_COUNT do begin
+        Bitmap.Canvas.Draw(HorsePosition[y], Round((y - 1) * Height / HORSE_COUNT), HorseImage[y]);
+      end;
 
       Canvas.Draw(0, 0, Bitmap);
     finally

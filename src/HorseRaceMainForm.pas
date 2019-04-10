@@ -15,14 +15,10 @@ type
   THorseRaceMainForm = class(TForm)
     Label1: TLabel;
     Timer1: TTimer;
+
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-
-  private
-
-  public
-
-end;
+  end;
 
 var
   MainForm: THorseRaceMainForm;
@@ -37,13 +33,12 @@ implementation
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
   begin
     TheTrack := THorseRaceTrack.Create(Self);
-    TheTrack.Height := 400;
-    TheTrack.Width := 500;
+    TheTrack.Width := Self.Width;
     TheTrack.Top := 0;
     TheTrack.Left := 0;
     TheTrack.Parent := Self;
+    TheTrack.Initialize();
     TheTrack.DoubleBuffered := True;
-    TheTrack.LoadImages(ResourceDirectory);
 
     Timer1.Interval := 1000; // milliseconds
     Timer1.Enabled := True;
@@ -54,7 +49,7 @@ implementation
     Inc(Counter);
     Label1.Caption := Format('%ds',[Counter]);
 
-    TheTrack.DrawRandomBlock();
+    TheTrack.MoveHorses();
     TheTrack.Paint();
   end;
 end.

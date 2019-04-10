@@ -36,7 +36,7 @@ implementation
     TimeInMilliseconds: Int64 = 0;
     //ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
-  procedure LoadHorsesForNewRace();
+  procedure LoadHorsesForNewRace;
   begin
 
   end;
@@ -48,8 +48,8 @@ implementation
     TheTrack.Top := 0;
     TheTrack.Left := 0;
     TheTrack.Parent := Self;
-    TheTrack.Initialize();
-    TheTrack.LoadHorses();
+    TheTrack.Initialize;
+    TheTrack.LoadHorses;
     TheTrack.DoubleBuffered := True;
 
     Self.Width := TheTrack.Width;
@@ -70,8 +70,8 @@ implementation
     TimeInMilliseconds := 0;
     TimeMillisecondsLabel.Caption := '';
 
-    TheTrack.LoadHorses();
-    TheTrack.Paint();
+    TheTrack.LoadHorses;
+    TheTrack.Paint;
   end;
 
   procedure THorseRaceMainForm.StartRaceClick(Sender: TObject);
@@ -85,8 +85,8 @@ implementation
     TimeInMilliseconds += Timer1.Interval;
     TimeMillisecondsLabel.Caption := Format('%d ms', [TimeInMilliseconds]);
 
-    TheTrack.MoveHorses();
-    TheTrack.Paint();
+    TheTrack.MoveHorses;
+    TheTrack.Paint;
 
     if (TheTrack.RaceOver) then begin
       LoadHorses.Enabled := True;

@@ -31,9 +31,9 @@ type
       RaceHasStarted: boolean;
       RaceIsOver: boolean;
     public
-      procedure Initialize();
-      procedure LoadHorses();
-      procedure MoveHorses();
+      procedure Initialize;
+      procedure LoadHorses;
+      procedure MoveHorses;
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
       property RaceOver: boolean read RaceIsOver;
@@ -41,7 +41,7 @@ type
 
 implementation
 
-  procedure THorseRaceTrack.Initialize();
+  procedure THorseRaceTrack.Initialize;
   var
     i: integer;
     toteName: string;
@@ -83,7 +83,7 @@ implementation
     RaceIsOver := false;
   end;
 
-  procedure THorseRaceTrack.LoadHorses();
+  procedure THorseRaceTrack.LoadHorses;
   var
     i: integer;
   begin
@@ -97,14 +97,14 @@ implementation
     RaceIsOver := false;
   end;
 
-  procedure THorseRaceTrack.MoveHorses();
+  procedure THorseRaceTrack.MoveHorses;
   var
     i: integer;
   begin
     RaceHasStarted := true;
 
     for i := 1 to HORSE_COUNT do begin
-      HorsePosition[i] += Round(HorseSpeed[i] * Random());
+      HorsePosition[i] += Round(HorseSpeed[i] * Random);
       if (HorsePosition[i] > FinishLine) then begin
         HorsePosition[i] := FinishLine;
         if (HorseFinishOrder[i]  = 0) then begin

@@ -2,10 +2,10 @@ object HorseRaceMainForm: THorseRaceMainForm
   Left = 283
   Height = 618
   Top = 145
-  Width = 708
+  Width = 842
   Caption = 'Horse Race'
   ClientHeight = 618
-  ClientWidth = 708
+  ClientWidth = 842
   OnCreate = FormCreate
   LCLVersion = '2.0.0.4'
   object Label1: TLabel

@@ -13,40 +13,61 @@ const
 
 type
   THorseRaceTrack = class(TCustomControl)
-  public
-    procedure Initialize();
-    procedure MoveHorses();
-    procedure EraseBackground({%H-}DC: HDC); override;
-    procedure Paint; override;
+    private
+      TrackSurfaceImage: TPortableNetworkGraphic;
+      ToteImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
+      HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
+      HorsePosition: array[1..HORSE_COUNT] of integer;
+      HorseSpeed: array[1..HORSE_COUNT] of integer;
+      HorseFinishOrder: array[1..HORSE_COUNT] of integer;
+      HorseHeight: integer;
+      HorseWidth: integer;
+      FinishLine: integer;
+      FinishedHorseCount: integer;
+      RaceIsOver: boolean;
+    public
+      procedure Initialize();
+      procedure MoveHorses();
+      procedure EraseBackground({%H-}DC: HDC); override;
+      procedure Paint; override;
+      property RaceOver: boolean read RaceIsOver;
   end;
 
 implementation
 
-  var
-    HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
-    HorsePosition: array[1..HORSE_COUNT] of integer;
-    HorseSpeed: array[1..HORSE_COUNT] of integer;
-    FinishLine: integer;
-
   procedure THorseRaceTrack.Initialize();
   var
     i: integer;
+    toteName: string;
+    tote: TPortableNetworkGraphic;
     horseName: string;
-    image: TPortableNetworkGraphic;
-    totalHeight: integer = 0;
+    horse: TPortableNetworkGraphic;
   begin
+    TrackSurfaceImage := TPortableNetworkGraphic.Create;
+    TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE');
     for i := 1 to HORSE_COUNT do begin
+      toteName := Format('TOTE_%d', [i]);
+      tote := TPortableNetworkGraphic.Create;
+      tote.LoadFromResourceName(HInstance, toteName);
+      ToteImage[i] := tote;
+
       horseName := Format('HORSE_%d', [i]);
-      image := TPortableNetworkGraphic.Create;
-      image.LoadFromResourceName(HInstance, horseName);
-      totalHeight += image.Height;
-      FinishLine := Self.Width - image.Width;
-      HorseImage[i] := image;
+      horse := TPortableNetworkGraphic.Create;
+      horse.LoadFromResourceName(HInstance, horseName);
+      HorseHeight := horse.Height;
+      HorseWidth := horse.Width;
+      HorseImage[i] := horse;
       HorsePosition[i] := 0;
       HorseSpeed[i] := HORSE_SPEED;
+      HorseFinishOrder[i] := 0;
     end;
 
-    Self.Height := totalHeight;
+    Self.Height := HorseHeight * (1 + HORSE_COUNT);
+    Self.Width := TrackSurfaceImage.Width;
+
+    FinishLine := Self.Width - HorseWidth;
+    FinishedHorseCount := 0;
+    RaceIsOver := false;
   end;
 
   procedure THorseRaceTrack.MoveHorses();
@@ -57,6 +78,11 @@ implementation
       HorsePosition[i] += Round(HorseSpeed[i] * Random());
       if (HorsePosition[i] > FinishLine) then begin
         HorsePosition[i] := FinishLine;
+        if (HorseFinishOrder[i]  = 0) then begin
+          Inc(FinishedHorseCount);
+          HorseFinishOrder[i] := FinishedHorseCount;
+          RaceIsOver := (FinishedHorseCount >= HORSE_COUNT);
+        end;
       end;
     end;
   end;
@@ -79,22 +105,16 @@ implementation
       Bitmap.Width := Width;
 
       // Draws the background
+      Bitmap.Canvas.Draw(0, 0, TrackSurfaceImage);
+
       Bitmap.Canvas.Pen.Color := clWhite;
-      Bitmap.Canvas.Rectangle(0, 0, Width, Height);
-
-      // Draws squares
-      Bitmap.Canvas.Pen.Color := clBlack;
-      for i := 1 to HORSE_COUNT do begin
-        Bitmap.Canvas.Rectangle(
-          0, Round((i - 1) * Height / HORSE_COUNT),
-          Width, Round(i * Height / HORSE_COUNT));
-      end;
-
-      Bitmap.Canvas.Pen.Color := clGreen;
       Bitmap.Canvas.Line(FinishLine, 0, FinishLine, Height);
 
       for i := 1 to HORSE_COUNT do begin
-        Bitmap.Canvas.Draw(HorsePosition[i], Round((i - 1) * Height / HORSE_COUNT), HorseImage[i]);
+        Bitmap.Canvas.Draw(HorsePosition[i], (i - 1) * HorseHeight, HorseImage[i]);
+        if (HorseFinishOrder[i] > 0) then begin
+          Bitmap.Canvas.Draw((HorseFinishOrder[i] - 1) * HorseWidth, HORSE_COUNT * HorseHeight, ToteImage[i]);
+        end;
       end;
 
       Canvas.Draw(0, 0, Bitmap);

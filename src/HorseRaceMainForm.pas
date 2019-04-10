@@ -42,6 +42,8 @@ implementation
     TheTrack.Initialize();
     TheTrack.DoubleBuffered := True;
 
+    Self.Width := TheTrack.Width;
+
     Timer1.Interval := 10; // milliseconds
     Timer1.Enabled := True;
   end;
@@ -53,6 +55,10 @@ implementation
 
     TheTrack.MoveHorses();
     TheTrack.Paint();
+
+    if (TheTrack.RaceOver) then begin
+      Timer1.Enabled := false;
+    end;
   end;
 end.
 

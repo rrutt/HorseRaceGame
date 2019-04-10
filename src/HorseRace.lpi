@@ -9,7 +9,7 @@
       <Title Value="HorseRace"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
-      <Resources Count="10">
+      <Resources Count="21">
         <Resource_0 FileName="..\res\Horse_1.png" Type="RCDATA" ResourceName="HORSE_1"/>
         <Resource_1 FileName="..\res\Horse_2.png" Type="RCDATA" ResourceName="HORSE_2"/>
         <Resource_2 FileName="..\res\Horse_3.png" Type="RCDATA" ResourceName="HORSE_3"/>
@@ -20,6 +20,17 @@
         <Resource_7 FileName="..\res\Horse_8.png" Type="RCDATA" ResourceName="HORSE_8"/>
         <Resource_8 FileName="..\res\Horse_9.png" Type="RCDATA" ResourceName="HORSE_9"/>
         <Resource_9 FileName="..\res\Horse_10.png" Type="RCDATA" ResourceName="HORSE_10"/>
+        <Resource_10 FileName="..\res\Track_Surface.png" Type="RCDATA" ResourceName="TRACK_SURFACE"/>
+        <Resource_11 FileName="..\res\Tote_1.png" Type="RCDATA" ResourceName="TOTE_1"/>
+        <Resource_12 FileName="..\res\Tote_2.png" Type="RCDATA" ResourceName="TOTE_2"/>
+        <Resource_13 FileName="..\res\Tote_3.png" Type="RCDATA" ResourceName="TOTE_3"/>
+        <Resource_14 FileName="..\res\Tote_4.png" Type="RCDATA" ResourceName="TOTE_4"/>
+        <Resource_15 FileName="..\res\Tote_5.png" Type="RCDATA" ResourceName="TOTE_5"/>
+        <Resource_16 FileName="..\res\Tote_6.png" Type="RCDATA" ResourceName="TOTE_6"/>
+        <Resource_17 FileName="..\res\Tote_7.png" Type="RCDATA" ResourceName="TOTE_7"/>
+        <Resource_18 FileName="..\res\Tote_8.png" Type="RCDATA" ResourceName="TOTE_8"/>
+        <Resource_19 FileName="..\res\Tote_9.png" Type="RCDATA" ResourceName="TOTE_9"/>
+        <Resource_20 FileName="..\res\Tote_10.png" Type="RCDATA" ResourceName="TOTE_10"/>
       </Resources>
     </General>
     <VersionInfo>

@@ -20,19 +20,19 @@
         <Resource_7 FileName="..\res\Horse_8.png" Type="RCDATA" ResourceName="HORSE_8"/>
         <Resource_8 FileName="..\res\Horse_9.png" Type="RCDATA" ResourceName="HORSE_9"/>
         <Resource_9 FileName="..\res\Horse_10.png" Type="RCDATA" ResourceName="HORSE_10"/>
-        <Resource_10 FileName="..\res\Track_Surface.png" Type="RCDATA" ResourceName="TRACK_SURFACE"/>
-        <Resource_11 FileName="..\res\Tote_1.png" Type="RCDATA" ResourceName="TOTE_1"/>
-        <Resource_12 FileName="..\res\Tote_2.png" Type="RCDATA" ResourceName="TOTE_2"/>
-        <Resource_13 FileName="..\res\Tote_3.png" Type="RCDATA" ResourceName="TOTE_3"/>
-        <Resource_14 FileName="..\res\Tote_4.png" Type="RCDATA" ResourceName="TOTE_4"/>
-        <Resource_15 FileName="..\res\Tote_5.png" Type="RCDATA" ResourceName="TOTE_5"/>
-        <Resource_16 FileName="..\res\Tote_6.png" Type="RCDATA" ResourceName="TOTE_6"/>
-        <Resource_17 FileName="..\res\Tote_7.png" Type="RCDATA" ResourceName="TOTE_7"/>
-        <Resource_18 FileName="..\res\Tote_8.png" Type="RCDATA" ResourceName="TOTE_8"/>
-        <Resource_19 FileName="..\res\Tote_9.png" Type="RCDATA" ResourceName="TOTE_9"/>
-        <Resource_20 FileName="..\res\Tote_10.png" Type="RCDATA" ResourceName="TOTE_10"/>
-        <Resource_21 FileName="..\res\Starting_Gate_Closed.png" Type="RCDATA" ResourceName="STARTING_GATE_CLOSED"/>
-        <Resource_22 FileName="..\res\Starting_Gate_Open.png" Type="RCDATA" ResourceName="STARTING_GATE_OPEN"/>
+        <Resource_10 FileName="..\res\Tote_1.png" Type="RCDATA" ResourceName="TOTE_1"/>
+        <Resource_11 FileName="..\res\Tote_2.png" Type="RCDATA" ResourceName="TOTE_2"/>
+        <Resource_12 FileName="..\res\Tote_3.png" Type="RCDATA" ResourceName="TOTE_3"/>
+        <Resource_13 FileName="..\res\Tote_4.png" Type="RCDATA" ResourceName="TOTE_4"/>
+        <Resource_14 FileName="..\res\Tote_5.png" Type="RCDATA" ResourceName="TOTE_5"/>
+        <Resource_15 FileName="..\res\Tote_6.png" Type="RCDATA" ResourceName="TOTE_6"/>
+        <Resource_16 FileName="..\res\Tote_7.png" Type="RCDATA" ResourceName="TOTE_7"/>
+        <Resource_17 FileName="..\res\Tote_8.png" Type="RCDATA" ResourceName="TOTE_8"/>
+        <Resource_18 FileName="..\res\Tote_9.png" Type="RCDATA" ResourceName="TOTE_9"/>
+        <Resource_19 FileName="..\res\Tote_10.png" Type="RCDATA" ResourceName="TOTE_10"/>
+        <Resource_20 FileName="..\res\Starting_Gate_Closed.png" Type="RCDATA" ResourceName="STARTING_GATE_CLOSED"/>
+        <Resource_21 FileName="..\res\Starting_Gate_Open.png" Type="RCDATA" ResourceName="STARTING_GATE_OPEN"/>
+        <Resource_22 FileName="..\res\Track_Surface_Wide.png" Type="RCDATA" ResourceName="TRACK_SURFACE_WIDE"/>
       </Resources>
     </General>
     <VersionInfo>

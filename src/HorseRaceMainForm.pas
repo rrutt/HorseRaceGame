@@ -15,7 +15,7 @@ type
   THorseRaceMainForm = class(TForm)
     StartRace: TButton;
     LoadHorses: TButton;
-    Label1: TLabel;
+    TimeMillisecondsLabel: TLabel;
     Timer1: TTimer;
 
     procedure FormCreate(Sender: TObject);
@@ -58,13 +58,17 @@ implementation
     Timer1.Enabled := False;
 
     LoadHorses.Enabled := False;
-    StartRace.Enabled := True
+    StartRace.Enabled := True;
+    TimeMillisecondsLabel.Caption := '';
   end;
 
   procedure THorseRaceMainForm.LoadHorsesClick(Sender: TObject);
   begin
     LoadHorses.Enabled := False;
     StartRace.Enabled := True;
+
+    TimeInMilliseconds := 0;
+    TimeMillisecondsLabel.Caption := '';
 
     TheTrack.LoadHorses();
     TheTrack.Paint();
@@ -79,7 +83,7 @@ implementation
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);
   begin
     TimeInMilliseconds += Timer1.Interval;
-    Label1.Caption := Format('%d ms', [TimeInMilliseconds]);
+    TimeMillisecondsLabel.Caption := Format('%d ms', [TimeInMilliseconds]);
 
     TheTrack.MoveHorses();
     TheTrack.Paint();

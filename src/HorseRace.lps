@@ -9,7 +9,7 @@
         <Filename Value="HorseRace.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos Y="18"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="44"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -18,21 +18,21 @@
         <ComponentName Value="HorseRaceMainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="34"/>
         <CursorPos X="65" Y="66"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="44"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="HorseRaceTrack.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="116"/>
-        <CursorPos X="86" Y="138"/>
-        <UsageCount Value="32"/>
+        <TopLine Value="62"/>
+        <CursorPos X="33" Y="77"/>
+        <UsageCount Value="37"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -85,7 +85,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1065"/>
         <CursorPos X="15" Y="1124"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit9>
       <Unit10>
         <Filename Value="D:\FreePascal\lazarus\lcl\intfgraphics.pas"/>
@@ -100,7 +100,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2071"/>
         <CursorPos X="60" Y="2089"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit11>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">

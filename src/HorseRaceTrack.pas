@@ -9,7 +9,7 @@ uses
 
 const
   HORSE_COUNT = 10;
-  HORSE_SPEED = 3;
+  HORSE_SPEED = 2;
   HORSE_START_POSITION = 10;
 
 type
@@ -18,6 +18,7 @@ type
       TrackSurfaceImage: TPortableNetworkGraphic;
       GateClosedImage: TPortableNetworkGraphic;
       GateOpenImage: TPortableNetworkGraphic;
+      GateWidth: integer;
       ToteImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
       HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
       HorsePosition: array[1..HORSE_COUNT] of integer;
@@ -49,13 +50,14 @@ implementation
     horse: TPortableNetworkGraphic;
   begin
     TrackSurfaceImage := TPortableNetworkGraphic.Create;
-    TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE');
+    TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE_WIDE');
 
     GateClosedImage := TPortableNetworkGraphic.Create;
     GateClosedImage.LoadFromResourceName(HInstance, 'STARTING_GATE_CLOSED');
 
     GateOpenImage := TPortableNetworkGraphic.Create;
     GateOpenImage.LoadFromResourceName(HInstance, 'STARTING_GATE_OPEN');
+    GateWidth := GateOpenImage.Width;
 
     for i := 1 to HORSE_COUNT do begin
       toteName := Format('TOTE_%d', [i]);
@@ -72,7 +74,7 @@ implementation
       HorseSpeed[i] := HORSE_SPEED;
     end;
 
-    Self.Height := HorseHeight * (1 + HORSE_COUNT);
+    Self.Height := HORSE_COUNT * HorseHeight;
     Self.Width := TrackSurfaceImage.Width;
 
     FinishLine := Self.Width - HorseWidth;
@@ -142,7 +144,7 @@ implementation
         end;
 
         if (HorseFinishOrder[i] > 0) then begin
-          Bitmap.Canvas.Draw((HorseFinishOrder[i] - 1) * HorseWidth, HORSE_COUNT * HorseHeight, ToteImage[i]);
+          Bitmap.Canvas.Draw(GateWidth + ((HorseFinishOrder[i] - 1) * HorseWidth), (HORSE_COUNT - 1) * HorseHeight, ToteImage[i]);
         end;
       end;
 

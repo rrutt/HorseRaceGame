@@ -72,13 +72,13 @@ implementation
       HorseImageWidth := horseBitmap.Width;
       HorseImage[i] := horseBitmap;
 
-      RaceHorse[i] := TRaceHorse.Create;
+      FinishLine := TrackSurfaceImage.Width - HorseImageWidth;
+      RaceHorse[i] := TRaceHorse.Create(HORSE_START_POSITION, FinishLine);
     end;
 
     Self.Height := HORSE_COUNT * HorseImageHeight;
     Self.Width := TrackSurfaceImage.Width;
 
-    FinishLine := Self.Width - HorseImageWidth;
     FinishPosition := FinishLine - HorseImageWidth;
     FinishedHorseCount := 0;
     RaceHasStarted := false;

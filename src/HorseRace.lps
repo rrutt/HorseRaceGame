@@ -9,7 +9,7 @@
         <Filename Value="HorseRace.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="20" Y="15"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -19,9 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="39" Y="46"/>
-        <UsageCount Value="46"/>
+        <TopLine Value="31"/>
+        <CursorPos X="18" Y="9"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -30,18 +30,17 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="90"/>
-        <CursorPos X="41" Y="108"/>
-        <UsageCount Value="39"/>
+        <TopLine Value="53"/>
+        <CursorPos X="53" Y="80"/>
+        <UsageCount Value="41"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="RaceHorse.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="12"/>
-        <CursorPos X="44" Y="39"/>
-        <UsageCount Value="21"/>
+        <CursorPos X="28" Y="11"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -115,128 +114,131 @@
         <Filename Value="D:\FreePascal\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="428"/>
-        <CursorPos X="24" Y="458"/>
+        <TopLine Value="19"/>
         <UsageCount Value="10"/>
       </Unit13>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="RaceHorse.pas"/>
-        <Caret Line="24" Column="55" TopLine="6"/>
+        <Caret Line="66" Column="29" TopLine="45"/>
       </Position1>
       <Position2>
         <Filename Value="RaceHorse.pas"/>
-        <Caret Line="28" Column="13" TopLine="10"/>
+        <Caret Line="80" Column="5" TopLine="62"/>
       </Position2>
       <Position3>
         <Filename Value="RaceHorse.pas"/>
-        <Caret Line="39" Column="23" TopLine="13"/>
+        <Caret Line="57" Column="13" TopLine="39"/>
       </Position3>
       <Position4>
         <Filename Value="RaceHorse.pas"/>
-        <Caret Line="35" Column="18" TopLine="13"/>
+        <Caret Line="80" Column="46" TopLine="51"/>
       </Position4>
       <Position5>
         <Filename Value="RaceHorse.pas"/>
-        <Caret Line="24" Column="59" TopLine="6"/>
+        <Caret Line="76" TopLine="51"/>
       </Position5>
       <Position6>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="27" Column="18" TopLine="13"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="59" TopLine="51"/>
       </Position6>
       <Position7>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="28" Column="17" TopLine="13"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="60" TopLine="51"/>
       </Position7>
       <Position8>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="11"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="59" Column="19" TopLine="51"/>
       </Position8>
       <Position9>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="9" Column="3"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="57" Column="84" TopLine="45"/>
       </Position9>
       <Position10>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="8" Column="50"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="62" TopLine="49"/>
       </Position10>
       <Position11>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="75" TopLine="55"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="69" Column="11" TopLine="51"/>
       </Position11>
       <Position12>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="29" Column="38" TopLine="16"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="77" Column="63" TopLine="51"/>
       </Position12>
       <Position13>
         <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="76" Column="34" TopLine="59"/>
+        <Caret Line="76" TopLine="59"/>
       </Position13>
       <Position14>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="80" Column="46" TopLine="58"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="59" TopLine="45"/>
       </Position14>
       <Position15>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="70" Column="59" TopLine="47"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="66" Column="37" TopLine="58"/>
       </Position15>
       <Position16>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="91" Column="7" TopLine="73"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="87" Column="3" TopLine="69"/>
       </Position16>
       <Position17>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="72" Column="37" TopLine="56"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="90" Column="28" TopLine="81"/>
       </Position17>
       <Position18>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="64" Column="7" TopLine="46"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="93" Column="35" TopLine="69"/>
       </Position18>
       <Position19>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="50" Column="16" TopLine="46"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="92" Column="66" TopLine="73"/>
       </Position19>
       <Position20>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="91" Column="7" TopLine="73"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="101" Column="5" TopLine="83"/>
       </Position20>
       <Position21>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="76" Column="20" TopLine="58"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="115" TopLine="86"/>
       </Position21>
       <Position22>
-        <Filename Value="HorseRaceMainForm.pas"/>
-        <Caret Line="46" Column="39" TopLine="25"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="107" TopLine="85"/>
       </Position22>
       <Position23>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="76" Column="36" TopLine="50"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="113" Column="63" TopLine="85"/>
       </Position23>
       <Position24>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="94" Column="7" TopLine="76"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="82" TopLine="65"/>
       </Position24>
       <Position25>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="75" Column="19" TopLine="53"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="88" TopLine="70"/>
       </Position25>
       <Position26>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="93" Column="7" TopLine="75"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="82" TopLine="71"/>
       </Position26>
       <Position27>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="94" Column="54" TopLine="75"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="102" Column="18" TopLine="79"/>
       </Position27>
       <Position28>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="116" TopLine="90"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="84" TopLine="77"/>
       </Position28>
       <Position29>
-        <Filename Value="HorseRaceTrack.pas"/>
-        <Caret Line="108" Column="20" TopLine="90"/>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="91" TopLine="76"/>
       </Position29>
+      <Position30>
+        <Filename Value="RaceHorse.pas"/>
+        <Caret Line="90" TopLine="76"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

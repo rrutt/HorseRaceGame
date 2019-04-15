@@ -7,4 +7,4 @@ lib/
 
 !Windows/*.exe
 
-HorsePopulation.json
+src/HorsePopulation.data

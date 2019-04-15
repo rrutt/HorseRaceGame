@@ -45,7 +45,7 @@ type
       procedure MoveHorse(FinishLine: integer);
       property Position: single read HorsePosition;
       property FinishOrder: integer read HorseFinishOrder write HorseFinishOrder;
-      constructor CreateFromJson(JsonString: string);
+      procedure FromJson(JsonString: string);
       function ToJson: string;
     published
       property SpeedInfo: THorseSpeedParameters read FSpeedInfo write FSpeedInfo;
@@ -115,17 +115,19 @@ implementation
   procedure TRaceHorse.MoveHorse(FinishLine: integer);
   var
     HorseSpeed: single;
+    FinishOrderOffset: single;
   begin
     HorseSpeed := ComputeCurrentSpeed(SpeedInfo, HorsePosition);
     HorsePosition += HorseSpeed * Random;
 
-    if (HorsePosition > FinishLine) then begin
-      HorsePosition := FinishLine;
+    FinishOrderOffset := 6 * (HorseFinishOrder - 1);
+    if (HorsePosition > (FinishLine - FinishOrderOffset)) then begin
+      HorsePosition := FinishLine - FinishOrderOffset;
     end;
   end;
 
   // http://wiki.freepascal.org/Streaming_JSON
-  constructor TRaceHorse.CreateFromJson(JsonString: string);
+  procedure TRaceHorse.FromJson(JsonString: string);
   var
     DeStreamer: TJSONDeStreamer;
   begin

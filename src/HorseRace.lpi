@@ -9,7 +9,7 @@
       <Title Value="HorseRace"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
-      <Resources Count="23">
+      <Resources Count="24">
         <Resource_0 FileName="..\res\Horse_1.png" Type="RCDATA" ResourceName="HORSE_1"/>
         <Resource_1 FileName="..\res\Horse_2.png" Type="RCDATA" ResourceName="HORSE_2"/>
         <Resource_2 FileName="..\res\Horse_3.png" Type="RCDATA" ResourceName="HORSE_3"/>
@@ -33,6 +33,7 @@
         <Resource_20 FileName="..\res\Starting_Gate_Closed.png" Type="RCDATA" ResourceName="STARTING_GATE_CLOSED"/>
         <Resource_21 FileName="..\res\Starting_Gate_Open.png" Type="RCDATA" ResourceName="STARTING_GATE_OPEN"/>
         <Resource_22 FileName="..\res\Track_Surface_Wide.png" Type="RCDATA" ResourceName="TRACK_SURFACE_WIDE"/>
+        <Resource_23 FileName="..\res\HorsePopulation.data" Type="RCDATA" ResourceName="HORSEPOPULATION"/>
       </Resources>
     </General>
     <VersionInfo>

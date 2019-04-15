@@ -5,7 +5,7 @@ unit RaceHorsePopulation;
 interface
 
 uses
-  Classes, SysUtils, fpjsonrtti,
+  Classes, SysUtils, resource,
   RaceHorse;
 
 type
@@ -17,10 +17,12 @@ type
         PopulationSize: integer;
         StartPosition: single;
         TrackLength: integer);
-      constructor CreateFromJson(JsonString: string);
-      function ToJson: string;
-      procedure WriteToJsonFile;
-      constructor CreateFromJsonFile;
+      function LoadHorse(
+        GateIndex: integer;
+        StartPosition: single): TRaceHorse;
+      procedure WriteToFile;
+      constructor CreateFromFile;
+      constructor CreateFromResource;
     published
       property RaceHorseCollection: TCollection read fRaceHorseCollection write fRaceHorseCollection;
   end;
@@ -41,61 +43,72 @@ implementation
     end;
   end;
 
-  // http://wiki.freepascal.org/Streaming_JSON
-  constructor TRaceHorsePopulation.CreateFromJson(JsonString: string);
+  function TRaceHorsePopulation.LoadHorse(
+    GateIndex: integer;
+    StartPosition: single): TRaceHorse;
   var
-    DeStreamer: TJSONDeStreamer;
+    horse: TRaceHorse;
   begin
-    try
-      DeStreamer := TJSONDeStreamer.Create(nil);
-      RaceHorseCollection := TCollection.Create(TRaceHorse);
-      DeStreamer.JSONToObject(JsonString, RaceHorseCollection);
-    finally
-      DeStreamer.Destroy;
-    end;
+    horse := TRaceHorse(RaceHorseCollection.Items[GateIndex - 1]);
+    horse.LoadHorse(StartPosition);
+    result := horse;
   end;
 
-  function TRaceHorsePopulation.ToJson: string;
+  procedure TRaceHorsePopulation.WriteToFile;
   var
-    Streamer: TJSONStreamer;
-    JsonString: string;
-  begin
-    try
-      Streamer := TJSONStreamer.Create(nil);
-      JsonString := Streamer.ObjectToJSONString(RaceHorseCollection);
-    finally
-      Streamer.Destroy;
-    end;
-    result := JsonString;
-  end;
-
-  procedure TRaceHorsePopulation.WriteToJsonFile;
-  var
-    JsonString: string;
+    horseCount: integer;
+    i: integer;
+    horse: TRaceHorse;
+    json: string;
     fsOut: TFileStream;
   begin
-    JsonString := Self.ToJson;
-    fsOut := TFileStream.Create('HorsePopulation.json', fmCreate);
-    fsOut.WriteAnsiString(JsonString);
+    fsOut := TFileStream.Create('HorsePopulation.data', fmCreate);
+    horseCount := RaceHorseCollection.Count;
+    fsOut.WriteDWord(horseCount);
+    for i := 1 to horseCount do begin
+      horse := TRaceHorse(RaceHorseCollection.Items[i - 1]);
+      json := horse.ToJson;
+      fsOut.WriteAnsiString(json);
+    end;
     fsOut.Free;
   end;
 
-  constructor TRaceHorsePopulation.CreateFromJsonFile;
+  constructor TRaceHorsePopulation.CreateFromFile;
   var
-    JsonString: string;
+    horseCount: integer;
+    i: integer;
+    horse: TRaceHorse;
+    json: string;
     fsIn: TFileStream;
-    DeStreamer: TJSONDeStreamer;
   begin
-    fsIn := TFileStream.Create('HorsePopulation.json', fmOpenRead);
-    JsonString := fsIn.ReadAnsiString;
-    fsIn.Free;
-    try
-      DeStreamer := TJSONDeStreamer.Create(nil);
-      RaceHorseCollection := TCollection.Create(TRaceHorse);
-      DeStreamer.JSONToObject(JsonString, RaceHorseCollection);
-    finally
-      DeStreamer.Destroy;
+    RaceHorseCollection := TCollection.Create(TRaceHorse);
+    fsIn := TFileStream.Create('HorsePopulation.data', fmOpenRead);
+    horseCount := fsIn.ReadDWord;
+    for i := 1 to horseCount do begin
+      json := fsIn.ReadAnsiString;
+      horse := TRaceHorse(RaceHorseCollection.Add);
+      horse.FromJson(json);
     end;
+    fsIn.Free;
+  end;
+
+  constructor TRaceHorsePopulation.CreateFromResource;
+  var
+    horseCount: integer;
+    i: integer;
+    horse: TRaceHorse;
+    json: string;
+    rsIn: TResourceStream;
+  begin
+    RaceHorseCollection := TCollection.Create(TRaceHorse);
+    rsIn := TResourceStream.Create(HInstance, 'HORSEPOPULATION', MAKEINTRESOURCE(RT_RCDATA));
+    horseCount := rsIn.ReadDWord;
+    for i := 1 to horseCount do begin
+      json := rsIn.ReadAnsiString;
+      horse := TRaceHorse(RaceHorseCollection.Add);
+      horse.FromJson(json);
+    end;
+    rsIn.Free;
   end;
 end.
 

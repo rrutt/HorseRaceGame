@@ -23,6 +23,7 @@ type
       GateOpenImage: TPortableNetworkGraphic;
       GateWidth: integer;
       ToteImage: array[1..GATE_COUNT] of TPortableNetworkGraphic;
+      ToteImageWidth: integer;
       HorseImage: array[1..GATE_COUNT] of TPortableNetworkGraphic;
       HorseImageHeight: integer;
       HorseImageWidth: integer;
@@ -50,8 +51,6 @@ implementation
     toteBitmap: TPortableNetworkGraphic;
     horseImageName: string;
     horseBitmap: TPortableNetworkGraphic;
-    horseJson: string;
-    horse: TRaceHorse;
   begin
     TrackSurfaceImage := TPortableNetworkGraphic.Create;
     TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE_WIDE');
@@ -67,6 +66,7 @@ implementation
       toteImageName := Format('TOTE_%d', [i]);
       toteBitmap := TPortableNetworkGraphic.Create;
       toteBitmap.LoadFromResourceName(HInstance, toteImageName);
+      ToteImageWidth := toteBitmap.Width;
       ToteImage[i] := toteBitmap;
 
       horseImageName := Format('HORSE_%d', [i]);
@@ -77,22 +77,7 @@ implementation
       HorseImage[i] := horseBitmap;
 
       FinishLine := TrackSurfaceImage.Width - HorseImageWidth;
-      horse := TRaceHorse.Create(nil);
-      horse.RandomizeSpeedInfo(HORSE_START_POSITION, FinishLine);
-      RaceHorse[i] := horse;
-      horseJson := RaceHorse[i].ToJson;
-      horse := TRaceHorse.CreateFromJson(horseJson);
-      horseJson := horse.ToJson;
     end;
-
-    HorsePopulation :=
-      TRaceHorsePopulation.CreateRandom(
-        HORSE_POPULATION_SIZE,
-        HORSE_START_POSITION,
-        FinishLine);
-    HorsePopulation.WriteToJsonFile;
-
-    HorsePopulation := TRaceHorsePopulation.CreateFromJsonFile;
 
     Self.Height := GATE_COUNT * HorseImageHeight;
     Self.Width := TrackSurfaceImage.Width;
@@ -101,6 +86,11 @@ implementation
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
+
+    HorsePopulation := TRaceHorsePopulation.CreateFromResource;
+    //HorsePopulation := TRaceHorsePopulation.CreateFromFile;
+    //HorsePopulation := TRaceHorsePopulation.CreateRandom(HORSE_POPULATION_SIZE, HORSE_START_POSITION, FinishLine);
+    HorsePopulation.WriteToFile;
   end;
 
   procedure THorseRaceTrack.LoadHorses;
@@ -108,7 +98,7 @@ implementation
     i: integer;
   begin
     for i := 1 to GATE_COUNT do begin
-      RaceHorse[i].LoadHorse(HORSE_START_POSITION);
+      RaceHorse[i] := HorsePopulation.LoadHorse(i, HORSE_START_POSITION);
     end;
 
     FinishedHorseCount := 0;
@@ -162,7 +152,7 @@ implementation
         end;
 
         if (RaceHorse[i].FinishOrder > 0) then begin
-          Bitmap.Canvas.Draw(GateWidth + ((RaceHorse[i].FinishOrder - 1) * HorseImageWidth), (GATE_COUNT - 1) * HorseImageHeight, ToteImage[i]);
+          Bitmap.Canvas.Draw(GateWidth + ((RaceHorse[i].FinishOrder - 1) * ToteImageWidth), (GATE_COUNT - 1) * HorseImageHeight, ToteImage[i]);
         end;
       end;
 

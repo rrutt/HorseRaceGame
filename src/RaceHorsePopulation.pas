@@ -8,6 +8,9 @@ uses
   Classes, SysUtils, resource,
   RaceHorse;
 
+const
+  HORSE_POPULATION_SIZE = 20;
+
 type
   TRaceHorsePopulation = class(TPersistent)
     private
@@ -29,6 +32,30 @@ type
   end;
 
 implementation
+  var
+    HorseNames: array [1..HORSE_POPULATION_SIZE] of string = (
+      'Fast Fourier',
+      'Famous Amos',
+      'Bourbon Believer',
+      'Whisky River',
+      'Voluptuous Vodka',
+      'Tequila Teaser',
+      'Rum Forest Rum',
+      'Gone For Gin',
+      'Hay Now',
+      'Oats For Otis',
+      'Streaking And Peaking',
+      'Kentucky Colonel',
+      'Sam I Am',
+      'Happy Hippy',
+      'Bourbon Barrel Beer',
+      'Bluegrass Baby',
+      'Derby Dreamer',
+      'Say No More',
+      'Happy Horton',
+      'Slippery Slope'
+      );
+
   constructor TRaceHorsePopulation.CreateRandom(
     PopulationSize: integer;
     StartPosition: single;
@@ -40,6 +67,7 @@ implementation
     RaceHorseCollection := TCollection.Create(TRaceHorse);
     for i := 1 to PopulationSize do begin
       horse := TRaceHorse(RaceHorseCollection.Add);
+      horse.Name := HorseNames[i];
       horse.RandomizeSpeedInfo(StartPosition, TrackLength);
     end;
   end;

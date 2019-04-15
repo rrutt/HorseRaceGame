@@ -12,7 +12,6 @@ uses
 
 const
   GATE_COUNT = 10;
-  HORSE_POPULATION_SIZE = 20;
   HORSE_START_POSITION = 10.0;
 
 type
@@ -90,7 +89,7 @@ implementation
     HorsePopulation := TRaceHorsePopulation.CreateFromResource;
     //HorsePopulation := TRaceHorsePopulation.CreateFromFile;
     //HorsePopulation := TRaceHorsePopulation.CreateRandom(HORSE_POPULATION_SIZE, HORSE_START_POSITION, FinishLine);
-    HorsePopulation.WriteToFile;
+    //HorsePopulation.WriteToFile;
   end;
 
   procedure THorseRaceTrack.LoadHorses;

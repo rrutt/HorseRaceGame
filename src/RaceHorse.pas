@@ -36,7 +36,8 @@ type
     private
       HorsePosition: single;
       HorseFinishOrder: integer;
-      FSpeedInfo: THorseSpeedParameters;
+      fName: string;
+      fSpeedInfo: THorseSpeedParameters;
     public
       procedure RandomizeSpeedInfo(
         StartPosition: single;
@@ -48,7 +49,8 @@ type
       procedure FromJson(JsonString: string);
       function ToJson: string;
     published
-      property SpeedInfo: THorseSpeedParameters read FSpeedInfo write FSpeedInfo;
+      property Name: string read fName write fName;
+      property SpeedInfo: THorseSpeedParameters read fSpeedInfo write fSpeedInfo;
   end;
 
 implementation

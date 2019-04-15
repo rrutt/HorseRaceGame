@@ -6,11 +6,13 @@ interface
 
 uses
   Classes, SysUtils, Controls, Graphics, LCLType,
-  RaceHorse
+  RaceHorse,
+  RaceHorsePopulation
   ;
 
 const
-  HORSE_COUNT = 10;
+  GATE_COUNT = 10;
+  HORSE_POPULATION_SIZE = 20;
   HORSE_START_POSITION = 10.0;
 
 type
@@ -20,8 +22,8 @@ type
       GateClosedImage: TPortableNetworkGraphic;
       GateOpenImage: TPortableNetworkGraphic;
       GateWidth: integer;
-      ToteImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
-      HorseImage: array[1..HORSE_COUNT] of TPortableNetworkGraphic;
+      ToteImage: array[1..GATE_COUNT] of TPortableNetworkGraphic;
+      HorseImage: array[1..GATE_COUNT] of TPortableNetworkGraphic;
       HorseImageHeight: integer;
       HorseImageWidth: integer;
       FinishLine: integer;
@@ -29,7 +31,8 @@ type
       FinishedHorseCount: integer;
       RaceHasStarted: boolean;
       RaceIsOver: boolean;
-      RaceHorse: array[1..HORSE_COUNT] of TRaceHorse;
+      RaceHorse: array[1..GATE_COUNT] of TRaceHorse;
+      HorsePopulation: TRaceHorsePopulation;
     public
       procedure Initialize;
       procedure LoadHorses;
@@ -40,7 +43,6 @@ type
   end;
 
 implementation
-
   procedure THorseRaceTrack.Initialize;
   var
     i: integer;
@@ -48,6 +50,8 @@ implementation
     toteBitmap: TPortableNetworkGraphic;
     horseImageName: string;
     horseBitmap: TPortableNetworkGraphic;
+    horseJson: string;
+    horse: TRaceHorse;
   begin
     TrackSurfaceImage := TPortableNetworkGraphic.Create;
     TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE_WIDE');
@@ -59,7 +63,7 @@ implementation
     GateOpenImage.LoadFromResourceName(HInstance, 'STARTING_GATE_OPEN');
     GateWidth := GateOpenImage.Width;
 
-    for i := 1 to HORSE_COUNT do begin
+    for i := 1 to GATE_COUNT do begin
       toteImageName := Format('TOTE_%d', [i]);
       toteBitmap := TPortableNetworkGraphic.Create;
       toteBitmap.LoadFromResourceName(HInstance, toteImageName);
@@ -73,10 +77,24 @@ implementation
       HorseImage[i] := horseBitmap;
 
       FinishLine := TrackSurfaceImage.Width - HorseImageWidth;
-      RaceHorse[i] := TRaceHorse.Create(HORSE_START_POSITION, FinishLine);
+      horse := TRaceHorse.Create(nil);
+      horse.RandomizeSpeedInfo(HORSE_START_POSITION, FinishLine);
+      RaceHorse[i] := horse;
+      horseJson := RaceHorse[i].ToJson;
+      horse := TRaceHorse.CreateFromJson(horseJson);
+      horseJson := horse.ToJson;
     end;
 
-    Self.Height := HORSE_COUNT * HorseImageHeight;
+    HorsePopulation :=
+      TRaceHorsePopulation.CreateRandom(
+        HORSE_POPULATION_SIZE,
+        HORSE_START_POSITION,
+        FinishLine);
+    HorsePopulation.WriteToJsonFile;
+
+    HorsePopulation := TRaceHorsePopulation.CreateFromJsonFile;
+
+    Self.Height := GATE_COUNT * HorseImageHeight;
     Self.Width := TrackSurfaceImage.Width;
 
     FinishPosition := FinishLine - HorseImageWidth;
@@ -89,7 +107,7 @@ implementation
   var
     i: integer;
   begin
-    for i := 1 to HORSE_COUNT do begin
+    for i := 1 to GATE_COUNT do begin
       RaceHorse[i].LoadHorse(HORSE_START_POSITION);
     end;
 
@@ -104,13 +122,13 @@ implementation
   begin
     RaceHasStarted := true;
 
-    for i := 1 to HORSE_COUNT do begin
+    for i := 1 to GATE_COUNT do begin
       RaceHorse[i].MoveHorse(FinishLine);
       if (RaceHorse[i].Position > FinishPosition) then begin
         if (RaceHorse[i].FinishOrder  = 0) then begin
           Inc(FinishedHorseCount);
           RaceHorse[i].FinishOrder := FinishedHorseCount;
-          RaceIsOver := (FinishedHorseCount >= HORSE_COUNT);
+          RaceIsOver := (FinishedHorseCount >= GATE_COUNT);
         end;
       end;
     end;
@@ -134,7 +152,7 @@ implementation
 
       Bitmap.Canvas.Draw(0, 0, TrackSurfaceImage);
 
-      for i := 1 to HORSE_COUNT do begin
+      for i := 1 to GATE_COUNT do begin
         Bitmap.Canvas.Draw(Round(RaceHorse[i].Position), (i - 1) * HorseImageHeight, HorseImage[i]);
 
         if (RaceHasStarted) then begin
@@ -144,7 +162,7 @@ implementation
         end;
 
         if (RaceHorse[i].FinishOrder > 0) then begin
-          Bitmap.Canvas.Draw(GateWidth + ((RaceHorse[i].FinishOrder - 1) * HorseImageWidth), (HORSE_COUNT - 1) * HorseImageHeight, ToteImage[i]);
+          Bitmap.Canvas.Draw(GateWidth + ((RaceHorse[i].FinishOrder - 1) * HorseImageWidth), (GATE_COUNT - 1) * HorseImageHeight, ToteImage[i]);
         end;
       end;
 

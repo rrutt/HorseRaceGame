@@ -6,3 +6,5 @@ lib/
 *.res
 
 !Windows/*.exe
+
+HorsePopulation.json

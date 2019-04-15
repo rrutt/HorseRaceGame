@@ -5,7 +5,7 @@ unit RaceHorse;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, fpjsonrtti;
 
 const
   MINIMUM_HORSE_SPEED = 1.0;
@@ -13,29 +13,42 @@ const
   MAXIMUM_HORSE_SPEED = 3.0;
 
 type
-  HorseSpeedParameters = record
-    BreakSpeed: single;
-    BreakDistance: single;
-    EarlySpeed: single;
-    EarlyDistance: single;
-    LateSpeed: single;
-    LateDistance: single;
-    ClosingSpeed: single;
+  THorseSpeedParameters = class(TPersistent)
+    private
+      fBreakSpeed: single;
+      fBreakDistance: single;
+      fEarlySpeed: single;
+      fEarlyDistance: single;
+      fLateSpeed: single;
+      fLateDistance: single;
+      fClosingSpeed: single;
+    published
+      property BreakSpeed: single read fBreakSpeed write fBreakSpeed;
+      property BreakDistance: single read fBreakDistance write fBreakDistance;
+      property EarlySpeed: single read fEarlySpeed write fEarlySpeed;
+      property EarlyDistance: single read fEarlyDistance write fEarlyDistance;
+      property LateSpeed: single read fLateSpeed write fLateSpeed;
+      property LateDistance: single read fLateDistance write fLateDistance;
+      property ClosingSpeed: single read fClosingSpeed write fClosingSpeed;
   end;
 
-  TRaceHorse = class
+  TRaceHorse = class(TCollectionItem)
     private
       HorsePosition: single;
       HorseFinishOrder: integer;
-      SpeedInfo: HorseSpeedParameters;
+      FSpeedInfo: THorseSpeedParameters;
     public
-      constructor Create(
+      procedure RandomizeSpeedInfo(
         StartPosition: single;
-        TrackLength: integer);
+        TrackLength: single);
       procedure LoadHorse(StartPosition: single);
       procedure MoveHorse(FinishLine: integer);
       property Position: single read HorsePosition;
       property FinishOrder: integer read HorseFinishOrder write HorseFinishOrder;
+      constructor CreateFromJson(JsonString: string);
+      function ToJson: string;
+    published
+      property SpeedInfo: THorseSpeedParameters read FSpeedInfo write FSpeedInfo;
   end;
 
 implementation
@@ -55,12 +68,11 @@ implementation
     end;
   end;
 
-  function RandomizeSpeedInfo(
+  procedure TRaceHorse.RandomizeSpeedInfo(
     StartPosition: single;
-    TrackLength: single): HorseSpeedParameters;
-  var
-    SpeedInfo: HorseSpeedParameters;
+    TrackLength: single);
   begin
+    SpeedInfo := THorseSpeedParameters.Create;
     with SpeedInfo do begin
       BreakSpeed := MINIMUM_HORSE_SPEED + (Random * AVERAGE_HORSE_SPEED);
       BreakDistance := StartPosition + (0.25 * Random * TrackLength);
@@ -80,11 +92,10 @@ implementation
             MAXIMUM_HORSE_SPEED),
           MINIMUM_HORSE_SPEED);
     end;
-    Result := SpeedInfo
   end;
 
   function ComputeCurrentSpeed(
-    SpeedInfo: HorseSpeedParameters;
+    SpeedInfo: THorseSpeedParameters;
     Position: single): single;
   begin
     with SpeedInfo do begin
@@ -93,13 +104,6 @@ implementation
       else if (Position <= LateDistance) then Result := LateSpeed
       else Result := ClosingSpeed;
     end;
-  end;
-
-  constructor TRaceHorse.Create(
-    StartPosition: single;
-    TrackLength: integer);
-  begin
-    SpeedInfo := RandomizeSpeedInfo(StartPosition, TrackLength);
   end;
 
   procedure TRaceHorse.LoadHorse(StartPosition: single);
@@ -118,6 +122,34 @@ implementation
     if (HorsePosition > FinishLine) then begin
       HorsePosition := FinishLine;
     end;
+  end;
+
+  // http://wiki.freepascal.org/Streaming_JSON
+  constructor TRaceHorse.CreateFromJson(JsonString: string);
+  var
+    DeStreamer: TJSONDeStreamer;
+  begin
+    try
+      DeStreamer := TJSONDeStreamer.Create(nil);
+      SpeedInfo := THorseSpeedParameters.Create;
+      DeStreamer.JSONToObject(JsonString, Self);
+    finally
+      DeStreamer.Destroy;
+    end;
+  end;
+
+  function TRaceHorse.ToJson: string;
+  var
+    Streamer: TJSONStreamer;
+    JsonString: string;
+  begin
+    try
+      Streamer := TJSONStreamer.Create(nil);
+      JsonString := Streamer.ObjectToJSONString(Self);
+    finally
+      Streamer.Destroy;
+    end;
+    result := JsonString;
   end;
 end.
 

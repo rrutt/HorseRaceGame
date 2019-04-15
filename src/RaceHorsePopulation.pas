@@ -23,6 +23,7 @@ type
       procedure WriteToFile;
       constructor CreateFromFile;
       constructor CreateFromResource;
+      procedure SortRandomly;
     published
       property RaceHorseCollection: TCollection read fRaceHorseCollection write fRaceHorseCollection;
   end;
@@ -109,6 +110,18 @@ implementation
       horse.FromJson(json);
     end;
     rsIn.Free;
+  end;
+
+  function RandomCompare(
+    {%H-}Item1: TCollectionItem;
+    {%H-}Item2: TCollectionItem): integer;
+  begin
+    result := Random(10) - 5;
+  end;
+
+  procedure TRaceHorsePopulation.SortRandomly;
+  begin;
+    RaceHorseCollection.Sort(@RandomCompare);
   end;
 end.
 

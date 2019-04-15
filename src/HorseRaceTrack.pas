@@ -97,6 +97,7 @@ implementation
   var
     i: integer;
   begin
+    HorsePopulation.SortRandomly;
     for i := 1 to GATE_COUNT do begin
       RaceHorse[i] := HorsePopulation.LoadHorse(i, HORSE_START_POSITION);
     end;

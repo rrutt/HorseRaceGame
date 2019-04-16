@@ -8,6 +8,7 @@ object HorseRaceMainForm: THorseRaceMainForm
   ClientWidth = 842
   OnCreate = FormCreate
   LCLVersion = '2.0.0.4'
+  Visible = True
   object TimeMillisecondsLabel: TLabel
     Left = 232
     Height = 21
@@ -38,6 +39,35 @@ object HorseRaceMainForm: THorseRaceMainForm
     Caption = 'Start Race'
     OnClick = StartRaceClick
     TabOrder = 1
+  end
+  object MemoHorseInfo: TMemo
+    Left = 120
+    Height = 488
+    Top = 8
+    Width = 584
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -20
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoHorseInfo'
+    )
+    ParentFont = False
+    TabOrder = 2
+    WordWrap = False
+  end
+  object ShowHorseInfo: TButton
+    Left = 704
+    Height = 25
+    Top = 504
+    Width = 112
+    Anchors = [akRight, akBottom]
+    Caption = 'Show Horse Info'
+    OnClick = ShowHorseInfoClick
+    TabOrder = 3
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

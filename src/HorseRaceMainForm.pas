@@ -13,6 +13,8 @@ type
   { THorseRaceMainForm }
 
   THorseRaceMainForm = class(TForm)
+    ShowHorseInfo: TButton;
+    MemoHorseInfo: TMemo;
     StartRace: TButton;
     LoadHorses: TButton;
     TimeMillisecondsLabel: TLabel;
@@ -20,8 +22,10 @@ type
 
     procedure FormCreate(Sender: TObject);
     procedure LoadHorsesClick(Sender: TObject);
+    procedure ShowHorseInfoClick(Sender: TObject);
     procedure StartRaceClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure LoadHorseInfo;
   end;
 
   var
@@ -36,9 +40,14 @@ implementation
     TimeInMilliseconds: Int64 = 0;
     //ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
-  procedure LoadHorsesForNewRace;
+  procedure THorseRaceMainForm.LoadHorseInfo;
+  var
+    horseInfo: TStringList;
   begin
-
+    horseInfo := TheTrack.GetHorseInfo;
+    MemoHorseInfo.Lines.Assign(horseInfo);
+    horseInfo.Free;
+    MemoHorseInfo.BringToFront;
   end;
 
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
@@ -51,6 +60,8 @@ implementation
     TheTrack.Initialize;
     TheTrack.LoadHorses;
     TheTrack.DoubleBuffered := True;
+
+    Self.LoadHorseInfo;
 
     Self.Width := TheTrack.Width;
 
@@ -72,12 +83,20 @@ implementation
 
     TheTrack.LoadHorses;
     TheTrack.Paint;
+
+    Self.LoadHorseInfo;
+  end;
+
+  procedure THorseRaceMainForm.ShowHorseInfoClick(Sender: TObject);
+  begin
+    MemoHorseInfo.BringToFront;
   end;
 
   procedure THorseRaceMainForm.StartRaceClick(Sender: TObject);
   begin
     StartRace.Enabled := False;
     Timer1.Enabled := True;
+    MemoHorseInfo.SendToBack;
   end;
 
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);

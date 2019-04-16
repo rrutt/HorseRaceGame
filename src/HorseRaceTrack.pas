@@ -36,6 +36,7 @@ type
     public
       procedure Initialize;
       procedure LoadHorses;
+      function GetHorseInfo: TStringList;
       procedure MoveHorses;
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
@@ -104,6 +105,24 @@ implementation
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
+  end;
+
+  function THorseRaceTrack.GetHorseInfo: TStringList;
+  var
+    horse: TRaceHorse;
+    horseInfo: TStringList;
+    i: integer;
+  begin;
+    horseInfo := TStringList.Create;
+    for i := 1 to GATE_COUNT do begin
+      horse := RaceHorse[i];
+      horseInfo.Add(horse.Name);
+      horseInfo.Add(
+        Format(
+          '  Speed Index: %d  Early Pace: %d  Late Pace: %d',
+          [horse.SpeedIndex, horse.EarlyPace, horse.LatePace]));
+    end;
+    result := horseInfo;
   end;
 
   procedure THorseRaceTrack.MoveHorses;

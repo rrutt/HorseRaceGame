@@ -46,6 +46,9 @@ type
       procedure MoveHorse(FinishLine: integer);
       property Position: single read HorsePosition;
       property FinishOrder: integer read HorseFinishOrder write HorseFinishOrder;
+      function SpeedIndex: integer;
+      function EarlyPace: integer;
+      function LatePace: integer;
       procedure FromJson(JsonString: string);
       function ToJson: string;
     published
@@ -125,6 +128,27 @@ implementation
     FinishOrderOffset := 6 * (HorseFinishOrder - 1);
     if (HorsePosition > (FinishLine - FinishOrderOffset)) then begin
       HorsePosition := FinishLine - FinishOrderOffset;
+    end;
+  end;
+
+  function TRaceHorse.SpeedIndex: integer;
+  begin
+    with SpeedInfo do begin
+      result := Round(10 * (BreakSpeed + EarlySpeed + LateSpeed + ClosingSpeed));
+    end;
+  end;
+
+  function TRaceHorse.EarlyPace: integer;
+  begin
+    with SpeedInfo do begin
+      result := Round(10 * (BreakSpeed + EarlySpeed));
+    end;
+  end;
+
+  function TRaceHorse.LatePace: integer;
+  begin
+    with SpeedInfo do begin
+      result := Round(10 * (LateSpeed + ClosingSpeed));
     end;
   end;
 

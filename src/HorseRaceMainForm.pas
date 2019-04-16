@@ -13,6 +13,7 @@ type
   { THorseRaceMainForm }
 
   THorseRaceMainForm = class(TForm)
+    RaceDistanceLabel: TLabel;
     ShowHorseInfo: TButton;
     MemoHorseInfo: TMemo;
     StartRace: TButton;
@@ -44,6 +45,8 @@ implementation
   var
     horseInfo: TStringList;
   begin
+    RaceDistanceLabel.Caption := Format('%d yards', [TheTrack.RaceDistance]);
+
     horseInfo := TheTrack.GetHorseInfo;
     MemoHorseInfo.Lines.Assign(horseInfo);
     horseInfo.Free;

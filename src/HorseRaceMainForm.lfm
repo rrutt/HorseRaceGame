@@ -69,6 +69,22 @@ object HorseRaceMainForm: THorseRaceMainForm
     OnClick = ShowHorseInfoClick
     TabOrder = 3
   end
+  object RaceDistanceLabel: TLabel
+    Left = 496
+    Height = 21
+    Top = 504
+    Width = 129
+    Anchors = [akLeft, akBottom]
+    Caption = 'RaceDistanceLabel'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     left = 8

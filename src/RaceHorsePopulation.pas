@@ -19,7 +19,7 @@ type
       constructor CreateRandom(
         PopulationSize: integer;
         StartPosition: single;
-        TrackLength: integer);
+        TrackWidth: integer);
       function LoadHorse(
         GateIndex: integer;
         StartPosition: single): TRaceHorse;
@@ -59,7 +59,7 @@ implementation
   constructor TRaceHorsePopulation.CreateRandom(
     PopulationSize: integer;
     StartPosition: single;
-    TrackLength: integer);
+    TrackWidth: integer);
   var
     i: integer;
     horse: TRaceHorse;
@@ -68,7 +68,7 @@ implementation
     for i := 1 to PopulationSize do begin
       horse := TRaceHorse(RaceHorseCollection.Add);
       horse.Name := HorseNames[i];
-      horse.RandomizeSpeedInfo(StartPosition, TrackLength);
+      horse.RandomizeSpeedInfo(StartPosition, TrackWidth);
     end;
   end;
 

@@ -18,6 +18,7 @@ type
   THorseRaceTrack = class(TCustomControl)
     private
       TrackSurfaceImage: TPortableNetworkGraphic;
+      TrackSurfaceImageWidth: integer;
       GateClosedImage: TPortableNetworkGraphic;
       GateOpenImage: TPortableNetworkGraphic;
       GateWidth: integer;
@@ -29,6 +30,7 @@ type
       FinishLine: integer;
       FinishPosition: integer;
       FinishedHorseCount: integer;
+      RaceDistanceInYards: integer;
       RaceHasStarted: boolean;
       RaceIsOver: boolean;
       RaceHorse: array[1..GATE_COUNT] of TRaceHorse;
@@ -41,9 +43,22 @@ type
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
       property RaceOver: boolean read RaceIsOver;
+      property RaceDistance: integer read RaceDistanceInYards;
   end;
 
 implementation
+  const
+    RACE_DISTANCE_COUNT = 5;
+
+  var
+    RaceDistancesInYards: array [1..RACE_DISTANCE_COUNT] of integer = (
+      220,
+      300,
+      330,
+      400,
+      440
+      );
+
   procedure THorseRaceTrack.Initialize;
   var
     i: integer;
@@ -54,6 +69,7 @@ implementation
   begin
     TrackSurfaceImage := TPortableNetworkGraphic.Create;
     TrackSurfaceImage.LoadFromResourceName(HInstance, 'TRACK_SURFACE_WIDE');
+    TrackSurfaceImageWidth := TrackSurfaceImage.Width;
 
     GateClosedImage := TPortableNetworkGraphic.Create;
     GateClosedImage.LoadFromResourceName(HInstance, 'STARTING_GATE_CLOSED');
@@ -75,27 +91,29 @@ implementation
       HorseImageHeight := horseBitmap.Height;
       HorseImageWidth := horseBitmap.Width;
       HorseImage[i] := horseBitmap;
-
-      FinishLine := TrackSurfaceImage.Width - HorseImageWidth;
     end;
 
     Self.Height := GATE_COUNT * HorseImageHeight;
-    Self.Width := TrackSurfaceImage.Width;
+    Self.Width := TrackSurfaceImageWidth;
 
-    FinishPosition := FinishLine - HorseImageWidth;
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
 
-    HorsePopulation := TRaceHorsePopulation.CreateFromResource;
+    //HorsePopulation := TRaceHorsePopulation.CreateFromResource;
     //HorsePopulation := TRaceHorsePopulation.CreateFromFile;
-    //HorsePopulation := TRaceHorsePopulation.CreateRandom(HORSE_POPULATION_SIZE, HORSE_START_POSITION, FinishLine);
-    //HorsePopulation.WriteToFile;
+    HorsePopulation := TRaceHorsePopulation.CreateRandom(HORSE_POPULATION_SIZE, HORSE_START_POSITION, TrackSurfaceImageWidth);
+    HorsePopulation.WriteToFile;
   end;
 
   procedure THorseRaceTrack.LoadHorses;
   var
     i: integer;
+    RaceDistanceIndex: integer;
+    RaceDistanceMaxYards: single;
+    RaceDistanceFloat: single;
+    RaceDistanceFraction: single;
+    FinishLineMaxYards: integer;
   begin
     HorsePopulation.SortRandomly;
     for i := 1 to GATE_COUNT do begin
@@ -105,6 +123,18 @@ implementation
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
+
+    RaceDistanceIndex := 1 + Random(RACE_DISTANCE_COUNT);
+    RaceDistanceInYards := RaceDistancesInYards[RaceDistanceIndex];
+    RaceDistanceMaxYards := RaceDistancesInYards[RACE_DISTANCE_COUNT];
+
+    RaceDistanceFloat := RaceDistanceInYards;
+    RaceDistanceFraction := RaceDistanceFloat / RaceDistanceMaxYards;
+
+    FinishLineMaxYards := TrackSurfaceImageWidth - HorseImageWidth;
+    FinishLine := Round(FinishLineMaxYards * RaceDistanceFraction);
+
+    FinishPosition := FinishLine - HorseImageWidth;
   end;
 
   function THorseRaceTrack.GetHorseInfo: TStringList;

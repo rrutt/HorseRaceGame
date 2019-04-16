@@ -41,7 +41,7 @@ type
     public
       procedure RandomizeSpeedInfo(
         StartPosition: single;
-        TrackLength: single);
+        TrackWidth: single);
       procedure LoadHorse(StartPosition: single);
       procedure MoveHorse(FinishLine: integer);
       property Position: single read HorsePosition;
@@ -75,21 +75,21 @@ implementation
 
   procedure TRaceHorse.RandomizeSpeedInfo(
     StartPosition: single;
-    TrackLength: single);
+    TrackWidth: single);
   begin
     SpeedInfo := THorseSpeedParameters.Create;
     with SpeedInfo do begin
       BreakSpeed := MINIMUM_HORSE_SPEED + (Random * AVERAGE_HORSE_SPEED);
-      BreakDistance := StartPosition + (0.25 * Random * TrackLength);
+      BreakDistance := StartPosition + (0.25 * Random * TrackWidth);
       EarlySpeed := Least(BreakSpeed + (Random * AVERAGE_HORSE_SPEED), MAXIMUM_HORSE_SPEED);
-      EarlyDistance := BreakDistance + (0.25 * Random * TrackLength);
+      EarlyDistance := BreakDistance + (0.25 * Random * TrackWidth);
       LateSpeed :=
         Greatest(
           Least(
             EarlySpeed + ((Random - 0.5) * MAXIMUM_HORSE_SPEED),
             MAXIMUM_HORSE_SPEED),
           MINIMUM_HORSE_SPEED);
-      LateDistance := EarlyDistance + (0.5 * Random * TrackLength);
+      LateDistance := EarlyDistance + (0.5 * Random * TrackWidth);
       ClosingSpeed :=
         Greatest(
           Least(

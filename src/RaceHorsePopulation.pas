@@ -9,7 +9,7 @@ uses
   RaceHorse;
 
 const
-  HORSE_POPULATION_SIZE = 20;
+  HORSE_POPULATION_SIZE = 30;
 
 type
   TRaceHorsePopulation = class(TPersistent)
@@ -49,11 +49,21 @@ implementation
       'Sam I Am',
       'Happy Hippy',
       'Bourbon Barrel Beer',
-      'Bluegrass Baby',
+      'Bluegrass Boss',
       'Derby Dreamer',
       'Say No More',
       'Happy Horton',
-      'Slippery Slope'
+      'Slippery Slope',
+      'Pony Express',
+      'Stewball',
+      'Old Spice',
+      'Freddie Freeloader',
+      'Rocket Ready',
+      'Meadow Man',
+      'Paddock Pappy',
+      'Italian Stallion',
+      'Distillery Dan',
+      'Mountain Man'
       );
 
   constructor TRaceHorsePopulation.CreateRandom(

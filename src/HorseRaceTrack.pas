@@ -105,7 +105,7 @@ implementation
     //HorsePopulation := TRaceHorsePopulation.CreateFromResource;
     //HorsePopulation := TRaceHorsePopulation.CreateFromFile;
     HorsePopulation := TRaceHorsePopulation.CreateRandom(HORSE_POPULATION_SIZE, HORSE_START_POSITION, TrackSurfaceImageWidth);
-    HorsePopulation.WriteToFile;
+    //HorsePopulation.WriteToFile;
   end;
 
   procedure THorseRaceTrack.LoadHorses;
@@ -192,8 +192,8 @@ implementation
       oddsInfo.Add(horse.Name);
       oddsInfo.Add(
         Format(
-          '  %d-1',
-          [HorseOdds[i]]));
+          '  #%d = %d-1',
+          [i, HorseOdds[i]]));
     end;
     result := oddsInfo;
   end;

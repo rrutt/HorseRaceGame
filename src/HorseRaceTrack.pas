@@ -212,15 +212,22 @@ implementation
 
   function THorseRaceTrack.GetPayoffInfo: TStringList;
   var
-    horse: TRaceHorse;
     payoffInfo: TStringList;
     i: integer;
+    horse: TRaceHorse;
+    winHorse: TRaceHorse;
+    placeHorse: TRaceHorse;
+    showHorse: TRaceHorse;
     finishIndex: integer;
     finishedHorseIndex: array [1..GATE_COUNT] of integer;
     finishedOdds: array [1..GATE_COUNT] of integer;
     winPayoff: currency;
     placePayoff: currency;
     showPayoff: currency;
+    exoticOdds: single;
+    exactaPayoff: currency;
+    quinellaPayoff: currency;
+    trifectaPayoff: currency;
   begin;
     for i := 1 to GATE_COUNT do begin
       horse := RaceHorse[i];
@@ -231,11 +238,11 @@ implementation
 
     payoffInfo := TStringList.Create;
 
-    horse := RaceHorse[finishedHorseIndex[1]];
+    winHorse := RaceHorse[finishedHorseIndex[1]];
     payoffInfo.Add(
       Format(
         '#%d  %s',
-        [finishedHorseIndex[1], horse.Name]));
+        [finishedHorseIndex[1], winHorse.Name]));
     winPayoff := EnsureMinPayoff(finishedOdds[1]);
     placePayoff := EnsureMinPayoff(finishedOdds[1] * 0.25);
     showPayoff := EnsureMinPayoff(finishedOdds[1] * 0.125);
@@ -244,11 +251,11 @@ implementation
         '      Win %m  Place %m  Show %m',
         [winPayoff, placePayoff, showPayoff]));
 
-    horse := RaceHorse[finishedHorseIndex[2]];
+    placeHorse := RaceHorse[finishedHorseIndex[2]];
     payoffInfo.Add(
       Format(
         '#%d  %s',
-        [finishedHorseIndex[2], horse.Name]));
+        [finishedHorseIndex[2], placeHorse.Name]));
     placePayoff := EnsureMinPayoff(finishedOdds[2] * 0.25);
     showPayoff := EnsureMinPayoff(finishedOdds[2] * 0.125);
     payoffInfo.Add(
@@ -256,16 +263,46 @@ implementation
         '                 Place %m  Show %m',
         [placePayoff, showPayoff]));
 
-    horse := RaceHorse[finishedHorseIndex[3]];
+    showHorse := RaceHorse[finishedHorseIndex[3]];
     payoffInfo.Add(
       Format(
         '#%d  %s',
-        [finishedHorseIndex[3], horse.Name]));
+        [finishedHorseIndex[3], showHorse.Name]));
     showPayoff := EnsureMinPayoff(finishedOdds[3] * 0.125);
     payoffInfo.Add(
       Format(
         '                              Show %m',
         [showPayoff]));
+
+    payoffInfo.Add(' ');
+
+    exoticOdds := (finishedOdds[1] + finishedOdds[2]) * 0.8;
+    quinellaPayoff := EnsureMinPayoff(exoticOdds);
+    if (finishedHorseIndex[1] < finishedHorseIndex[2]) then begin
+      payoffInfo.Add(
+        Format(
+          '    Quinella %d/%d %m',
+          [finishedHorseIndex[1], finishedHorseIndex[2], quinellaPayoff]));
+    end else begin
+      payoffInfo.Add(
+        Format(
+          '    Quinella %d/%d %m',
+          [finishedHorseIndex[2], finishedHorseIndex[1], quinellaPayoff]));
+    end;
+
+    exoticOdds := finishedOdds[1] + (finishedOdds[2] * 0.9);
+    exactaPayoff := EnsureMinPayoff(exoticOdds);
+    payoffInfo.Add(
+      Format(
+        '    Exacta %d/%d %m',
+        [finishedHorseIndex[1], finishedHorseIndex[2], exactaPayoff]));
+
+    exoticOdds := finishedOdds[1] + (finishedOdds[2] * 0.9) + (finishedOdds[3] * 0.75);
+    trifectaPayoff := EnsureMinPayoff(exoticOdds);
+    payoffInfo.Add(
+      Format(
+        '    Trifecta %d/%d/%d %m',
+        [finishedHorseIndex[1], finishedHorseIndex[2], finishedHorseIndex[3], trifectaPayoff]));
 
     result := payoffInfo;
   end;

@@ -100,9 +100,12 @@ implementation
   end;
 
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);
+  var
+    TimeInSeconds: single;
   begin
     TimeInMilliseconds += Timer1.Interval;
-    TimeMillisecondsLabel.Caption := Format('%d ms', [TimeInMilliseconds]);
+    TimeInSeconds := TimeInMilliseconds * 0.001;
+    TimeMillisecondsLabel.Caption := Format('%.2f sec', [TimeInSeconds]);
 
     TheTrack.MoveHorses;
     TheTrack.Paint;

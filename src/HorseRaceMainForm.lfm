@@ -41,10 +41,10 @@ object HorseRaceMainForm: THorseRaceMainForm
     TabOrder = 1
   end
   object MemoHorseInfo: TMemo
-    Left = 120
-    Height = 488
+    Left = 104
+    Height = 490
     Top = 8
-    Width = 584
+    Width = 456
     Anchors = [akTop, akLeft, akRight, akBottom]
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack
@@ -59,14 +59,14 @@ object HorseRaceMainForm: THorseRaceMainForm
     TabOrder = 2
     WordWrap = False
   end
-  object ShowHorseInfo: TButton
+  object ShowHorseOdds: TButton
     Left = 704
     Height = 25
     Top = 504
     Width = 112
     Anchors = [akRight, akBottom]
-    Caption = 'Show Horse Info'
-    OnClick = ShowHorseInfoClick
+    Caption = 'Show Horse Odds'
+    OnClick = ShowHorseOddsClick
     TabOrder = 3
   end
   object RaceDistanceLabel: TLabel
@@ -84,6 +84,25 @@ object HorseRaceMainForm: THorseRaceMainForm
     Font.Quality = fqDraft
     ParentColor = False
     ParentFont = False
+  end
+  object MemoHorseOdds: TMemo
+    Left = 568
+    Height = 490
+    Top = 8
+    Width = 262
+    Anchors = [akTop, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -20
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoHorseOdds'
+    )
+    ParentFont = False
+    TabOrder = 4
+    WordWrap = False
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

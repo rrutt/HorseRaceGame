@@ -34,11 +34,13 @@ type
       RaceHasStarted: boolean;
       RaceIsOver: boolean;
       RaceHorse: array[1..GATE_COUNT] of TRaceHorse;
+      HorseOdds: array[1..GATE_COUNT] of integer;
       HorsePopulation: TRaceHorsePopulation;
     public
       procedure Initialize;
       procedure LoadHorses;
       function GetHorseInfo: TStringList;
+      function GetOddsInfo: TStringList;
       procedure MoveHorses;
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
@@ -153,6 +155,47 @@ implementation
           [horse.SpeedIndex, horse.EarlyPace, horse.LatePace]));
     end;
     result := horseInfo;
+  end;
+
+  function THorseRaceTrack.GetOddsInfo: TStringList;
+  var
+    horse: TRaceHorse;
+    oddsInfo: TStringList;
+    i: integer;
+    minSpeedIndex: single;
+    maxSpeedIndex: single;
+    totalSpeedIndex: single;
+    deltaSpeedIndex: single;
+    speedIndexFloat: single;
+  begin;
+    minSpeedIndex := 999;
+    maxSpeedIndex := 0;
+    totalSpeedIndex := 0;
+    for i := 1 to GATE_COUNT do begin
+      horse := RaceHorse[i];
+      speedIndexFloat := horse.SpeedIndex;
+      if (speedIndexFloat < minSpeedIndex) then begin
+        minSpeedIndex := speedIndexFloat;
+      end;
+      if (speedIndexFloat > maxSpeedIndex) then begin
+        maxSpeedIndex := speedIndexFloat;
+      end;
+      totalSpeedIndex += speedIndexFloat;
+    end;
+    deltaSpeedIndex := 1.0 + maxSpeedIndex - minSpeedIndex;
+
+    oddsInfo := TStringList.Create;
+    for i := 1 to GATE_COUNT do begin
+      horse := RaceHorse[i];
+      speedIndexFloat := horse.SpeedIndex;
+      HorseOdds[i] := 1 + Round(10.0 * ((maxSpeedIndex - speedIndexFloat) / deltaSpeedIndex));
+      oddsInfo.Add(horse.Name);
+      oddsInfo.Add(
+        Format(
+          '  %d-1',
+          [HorseOdds[i]]));
+    end;
+    result := oddsInfo;
   end;
 
   procedure THorseRaceTrack.MoveHorses;

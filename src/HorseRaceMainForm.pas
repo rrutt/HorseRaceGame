@@ -13,8 +13,9 @@ type
   { THorseRaceMainForm }
 
   THorseRaceMainForm = class(TForm)
+    MemoHorseOdds: TMemo;
     RaceDistanceLabel: TLabel;
-    ShowHorseInfo: TButton;
+    ShowHorseOdds: TButton;
     MemoHorseInfo: TMemo;
     StartRace: TButton;
     LoadHorses: TButton;
@@ -23,10 +24,10 @@ type
 
     procedure FormCreate(Sender: TObject);
     procedure LoadHorsesClick(Sender: TObject);
-    procedure ShowHorseInfoClick(Sender: TObject);
+    procedure ShowHorseOddsClick(Sender: TObject);
     procedure StartRaceClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure LoadHorseInfo;
+    procedure LoadHorseAndOddsInfo;
   end;
 
   var
@@ -41,9 +42,10 @@ implementation
     TimeInMilliseconds: Int64 = 0;
     //ResourceDirectory: UTF8String {$IFNDEF MACOSX} = '../res/' {$ENDIF};
 
-  procedure THorseRaceMainForm.LoadHorseInfo;
+  procedure THorseRaceMainForm.LoadHorseAndOddsInfo;
   var
     horseInfo: TStringList;
+    oddsInfo: TStringList;
   begin
     RaceDistanceLabel.Caption := Format('%d yards', [TheTrack.RaceDistance]);
 
@@ -51,6 +53,11 @@ implementation
     MemoHorseInfo.Lines.Assign(horseInfo);
     horseInfo.Free;
     MemoHorseInfo.BringToFront;
+
+    oddsInfo := TheTrack.GetOddsInfo;
+    MemoHorseOdds.Lines.Assign(oddsInfo);
+    oddsInfo.Free;
+    MemoHorseOdds.BringToFront;
   end;
 
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
@@ -64,7 +71,7 @@ implementation
     TheTrack.LoadHorses;
     TheTrack.DoubleBuffered := True;
 
-    Self.LoadHorseInfo;
+    Self.LoadHorseAndOddsInfo;
 
     Self.Width := TheTrack.Width;
 
@@ -87,12 +94,12 @@ implementation
     TheTrack.LoadHorses;
     TheTrack.Paint;
 
-    Self.LoadHorseInfo;
+    Self.LoadHorseAndOddsInfo;
   end;
 
-  procedure THorseRaceMainForm.ShowHorseInfoClick(Sender: TObject);
+  procedure THorseRaceMainForm.ShowHorseOddsClick(Sender: TObject);
   begin
-    MemoHorseInfo.BringToFront;
+    MemoHorseOdds.BringToFront;
   end;
 
   procedure THorseRaceMainForm.StartRaceClick(Sender: TObject);
@@ -100,6 +107,7 @@ implementation
     StartRace.Enabled := False;
     Timer1.Enabled := True;
     MemoHorseInfo.SendToBack;
+    MemoHorseOdds.SendToBack;
   end;
 
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);

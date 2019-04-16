@@ -38,7 +38,7 @@ implementation
       'Famous Amos',
       'Bourbon Believer',
       'Whisky River',
-      'Voluptuous Vodka',
+      'Victory Vodka',
       'Tequila Teaser',
       'Rum Forest Rum',
       'Gone For Gin',

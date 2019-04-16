@@ -13,6 +13,8 @@ type
   { THorseRaceMainForm }
 
   THorseRaceMainForm = class(TForm)
+    MemoPayoffs: TMemo;
+    ShowPayoffs: TButton;
     MemoHorseOdds: TMemo;
     RaceDistanceLabel: TLabel;
     ShowHorseOdds: TButton;
@@ -25,6 +27,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure LoadHorsesClick(Sender: TObject);
     procedure ShowHorseOddsClick(Sender: TObject);
+    procedure ShowPayoffsClick(Sender: TObject);
     procedure StartRaceClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure LoadHorseAndOddsInfo;
@@ -47,6 +50,11 @@ implementation
     horseInfo: TStringList;
     oddsInfo: TStringList;
   begin
+    ShowPayoffs.Enabled := False;
+    ShowHorseOdds.Enabled := False;
+
+    MemoPayoffs.SendToBack;
+
     RaceDistanceLabel.Caption := Format('%d yards', [TheTrack.RaceDistance]);
 
     horseInfo := TheTrack.GetHorseInfo;
@@ -99,7 +107,20 @@ implementation
 
   procedure THorseRaceMainForm.ShowHorseOddsClick(Sender: TObject);
   begin
+    ShowHorseOdds.Enabled := False;
     MemoHorseOdds.BringToFront;
+  end;
+
+  procedure THorseRaceMainForm.ShowPayoffsClick(Sender: TObject);
+  var
+    payoffInfo: TStringList;
+  begin
+    ShowPayoffs.Enabled := False;
+
+    payoffInfo := TheTrack.GetPayoffInfo;
+    MemoPayoffs.Lines.Assign(payoffInfo);
+    payoffInfo.Free;
+    MemoPayoffs.BringToFront;
   end;
 
   procedure THorseRaceMainForm.StartRaceClick(Sender: TObject);
@@ -108,6 +129,7 @@ implementation
     Timer1.Enabled := True;
     MemoHorseInfo.SendToBack;
     MemoHorseOdds.SendToBack;
+    MemoPayoffs.SendToBack;
   end;
 
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);
@@ -123,6 +145,8 @@ implementation
 
     if (TheTrack.RaceOver) then begin
       LoadHorses.Enabled := True;
+      ShowPayoffs.Enabled := True;
+      ShowHorseOdds.Enabled := True;
       Timer1.Enabled := false;
     end;
   end;

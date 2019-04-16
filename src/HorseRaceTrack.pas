@@ -41,6 +41,7 @@ type
       procedure LoadHorses;
       function GetHorseInfo: TStringList;
       function GetOddsInfo: TStringList;
+      function GetPayoffInfo: TStringList;
       procedure MoveHorses;
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
@@ -196,6 +197,77 @@ implementation
           [i, HorseOdds[i]]));
     end;
     result := oddsInfo;
+  end;
+
+  function EnsureMinPayoff(odds: single): currency;
+  var
+    payoff: currency;
+  begin
+    payoff := 2.0 * (1 + odds);
+    if (payoff < 2.10) then begin
+      payoff := 2.10;
+    end;
+    result := payoff
+  end;
+
+  function THorseRaceTrack.GetPayoffInfo: TStringList;
+  var
+    horse: TRaceHorse;
+    payoffInfo: TStringList;
+    i: integer;
+    finishIndex: integer;
+    finishedHorseIndex: array [1..GATE_COUNT] of integer;
+    finishedOdds: array [1..GATE_COUNT] of integer;
+    winPayoff: currency;
+    placePayoff: currency;
+    showPayoff: currency;
+  begin;
+    for i := 1 to GATE_COUNT do begin
+      horse := RaceHorse[i];
+      finishIndex := horse.FinishOrder;
+      finishedHorseIndex[finishIndex] := i;
+      finishedOdds[finishIndex] := HorseOdds[i];
+    end;
+
+    payoffInfo := TStringList.Create;
+
+    horse := RaceHorse[finishedHorseIndex[1]];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s',
+        [finishedHorseIndex[1], horse.Name]));
+    winPayoff := EnsureMinPayoff(finishedOdds[1]);
+    placePayoff := EnsureMinPayoff(finishedOdds[1] * 0.25);
+    showPayoff := EnsureMinPayoff(finishedOdds[1] * 0.125);
+    payoffInfo.Add(
+      Format(
+        '      Win %m  Place %m  Show %m',
+        [winPayoff, placePayoff, showPayoff]));
+
+    horse := RaceHorse[finishedHorseIndex[2]];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s',
+        [finishedHorseIndex[2], horse.Name]));
+    placePayoff := EnsureMinPayoff(finishedOdds[2] * 0.25);
+    showPayoff := EnsureMinPayoff(finishedOdds[2] * 0.125);
+    payoffInfo.Add(
+      Format(
+        '                 Place %m  Show %m',
+        [placePayoff, showPayoff]));
+
+    horse := RaceHorse[finishedHorseIndex[3]];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s',
+        [finishedHorseIndex[3], horse.Name]));
+    showPayoff := EnsureMinPayoff(finishedOdds[3] * 0.125);
+    payoffInfo.Add(
+      Format(
+        '                              Show %m',
+        [showPayoff]));
+
+    result := payoffInfo;
   end;
 
   procedure THorseRaceTrack.MoveHorses;

@@ -8,9 +8,9 @@ uses
   Classes, SysUtils, fpjsonrtti;
 
 const
-  MINIMUM_HORSE_SPEED = 1.0;
-  AVERAGE_HORSE_SPEED = 2.0;
-  MAXIMUM_HORSE_SPEED = 3.0;
+  MINIMUM_HORSE_SPEED = 1.75;
+  AVERAGE_HORSE_SPEED = 2.25;
+  MAXIMUM_HORSE_SPEED = 2.75;
 
 type
   THorseSpeedParameters = class(TPersistent)
@@ -79,7 +79,10 @@ implementation
   begin
     SpeedInfo := THorseSpeedParameters.Create;
     with SpeedInfo do begin
-      BreakSpeed := MINIMUM_HORSE_SPEED + (Random * AVERAGE_HORSE_SPEED);
+      BreakSpeed :=
+        Greatest(
+          MINIMUM_HORSE_SPEED,
+          Random * AVERAGE_HORSE_SPEED);
       BreakDistance := StartPosition + (0.25 * Random * TrackWidth);
       EarlySpeed := Least(BreakSpeed + (Random * AVERAGE_HORSE_SPEED), MAXIMUM_HORSE_SPEED);
       EarlyDistance := BreakDistance + (0.25 * Random * TrackWidth);

@@ -51,13 +51,15 @@ type
 
 implementation
   const
-    RACE_DISTANCE_COUNT = 5;
+    RACE_DISTANCE_COUNT = 7;
 
   var
     RaceDistancesInYards: array [1..RACE_DISTANCE_COUNT] of integer = (
       220,
+      250,
       300,
       330,
+      350,
       400,
       440
       );

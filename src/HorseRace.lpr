@@ -12,7 +12,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
-  HorseRaceMainForm
+  HorseRaceMainForm, HorsePlayerForm
   ;
 
 begin
@@ -21,6 +21,7 @@ begin
   RequireDerivedFormResource := True;
   Application.Initialize;
   Application.CreateForm(THorseRaceMainForm, MainForm);
+  Application.CreateForm(THorsePlayerForm, PlayerForm);
   Application.Run;
 end.
 

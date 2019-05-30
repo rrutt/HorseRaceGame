@@ -51,10 +51,11 @@ type
 
 implementation
   const
-    RACE_DISTANCE_COUNT = 7;
+    RACE_DISTANCE_COUNT = 8;
 
   var
     RaceDistancesInYards: array [1..RACE_DISTANCE_COUNT] of integer = (
+      110,
       220,
       250,
       300,
@@ -240,6 +241,9 @@ implementation
 
     payoffInfo := TStringList.Create;
 
+    payoffInfo.Add('$2 Payoffs');
+    payoffInfo.Add(' ');
+
     winHorse := RaceHorse[finishedHorseIndex[1]];
     payoffInfo.Add(
       Format(
@@ -278,7 +282,7 @@ implementation
 
     payoffInfo.Add(' ');
 
-    exoticOdds := (finishedOdds[1] + finishedOdds[2]) * 0.8;
+    exoticOdds := finishedOdds[1] * finishedOdds[2] * 0.8;
     quinellaPayoff := EnsureMinPayoff(exoticOdds);
     if (finishedHorseIndex[1] < finishedHorseIndex[2]) then begin
       payoffInfo.Add(
@@ -292,14 +296,14 @@ implementation
           [finishedHorseIndex[2], finishedHorseIndex[1], quinellaPayoff]));
     end;
 
-    exoticOdds := finishedOdds[1] + (finishedOdds[2] * 0.9);
+    exoticOdds := 2.0 * (finishedOdds[1] + (finishedOdds[2] * 0.8));
     exactaPayoff := EnsureMinPayoff(exoticOdds);
     payoffInfo.Add(
       Format(
         '    Exacta %d/%d %m',
         [finishedHorseIndex[1], finishedHorseIndex[2], exactaPayoff]));
 
-    exoticOdds := finishedOdds[1] + (finishedOdds[2] * 0.9) + (finishedOdds[3] * 0.75);
+    exoticOdds := 2.0 * (finishedOdds[1] + (finishedOdds[2] * 0.9) + (finishedOdds[3] * 0.8));
     trifectaPayoff := EnsureMinPayoff(exoticOdds);
     payoffInfo.Add(
       Format(

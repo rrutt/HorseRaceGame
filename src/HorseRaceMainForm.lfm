@@ -116,7 +116,7 @@ object HorseRaceMainForm: THorseRaceMainForm
   end
   object MemoPayoffs: TMemo
     Left = 104
-    Height = 264
+    Height = 304
     Top = 40
     Width = 456
     Anchors = [akTop, akLeft, akRight]

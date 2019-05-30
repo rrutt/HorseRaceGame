@@ -5,7 +5,8 @@ unit HorsePlayerForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  RaceBet;
 
 type
 
@@ -43,6 +44,7 @@ type
 
   private
     Bankroll: currency;
+    PlayerBets: TFPlist;
 
   public
 
@@ -62,6 +64,7 @@ implementation
     NameEdit.Text := ' ';
     Bankroll := 1000;
     BankrollEdit.Text := Format('%m', [Bankroll]);
+    PlayerBets := TFPList.Create;
     MemoBets.Lines.Clear;
   end;
 
@@ -85,29 +88,57 @@ implementation
   procedure THorsePlayerForm.PlaceBetsButtonClick(Sender: TObject);
   var
     betsInfo: TStringList;
+    bet: TRaceBet;
   begin
     betsInfo := TStringList.Create;
 
     if (WinCombo.ItemIndex > 0) then begin
-      betsInfo.Add(Format('$2 Win %d', [WinCombo.ItemIndex]));
+      bet := TRaceBet.Win(WinCombo.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
       Bankroll := Bankroll - 2;
       WinCombo.ItemIndex := -1;
     end;
 
     if (PlaceCombo.ItemIndex > 0) then begin
-      betsInfo.Add(Format('$2 Place %d', [PlaceCombo.ItemIndex]));
+      bet := TRaceBet.Place(PlaceCombo.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
       Bankroll := Bankroll - 2;
       PlaceCombo.ItemIndex := -1;
     end;
 
     if (ShowCombo.ItemIndex > 0) then begin
-      betsInfo.Add(Format('$2 Show %d', [ShowCombo.ItemIndex]));
+      bet := TRaceBet.Show(ShowCombo.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
       Bankroll := Bankroll - 2;
       ShowCombo.ItemIndex := -1;
     end;
 
-    if ((QuinellaCombo1.ItemIndex > 0) and (QuinellaCombo2.ItemIndex > 0)) then begin
-      betsInfo.Add(Format('$2 Quinella %d / %d', [QuinellaCombo1.ItemIndex, QuinellaCombo2.ItemIndex]));
+    if ((QuinellaCombo1.ItemIndex > 0) and (QuinellaCombo2.ItemIndex > 0) and
+        (QuinellaCombo1.ItemIndex <> QuinellaCombo2.ItemIndex)) then begin
+      bet := TRaceBet.Quinella(QuinellaCombo1.ItemIndex, QuinellaCombo2.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
+      Bankroll := Bankroll - 2;
+    end;
+
+    if ((ExactaCombo1.ItemIndex > 0) and (ExactaCombo2.ItemIndex > 0) and
+        (ExactaCombo1.ItemIndex <> ExactaCombo2.ItemIndex)) then begin
+      bet := TRaceBet.Exacta(ExactaCombo1.ItemIndex, ExactaCombo2.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
+      Bankroll := Bankroll - 2;
+    end;
+
+    if ((TrifectaCombo1.ItemIndex > 0) and (TrifectaCombo2.ItemIndex > 0) and (TrifectaCombo3.ItemIndex > 0) and
+        (TrifectaCombo1.ItemIndex <> TrifectaCombo2.ItemIndex) and
+        (TrifectaCombo1.ItemIndex <> TrifectaCombo3.ItemIndex) and
+        (TrifectaCombo2.ItemIndex <> TrifectaCombo3.ItemIndex)) then begin
+      bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex);
+      PlayerBets.Add(bet);
+      betsInfo.Add(bet.FormatDisplayString());
       Bankroll := Bankroll - 2;
     end;
 

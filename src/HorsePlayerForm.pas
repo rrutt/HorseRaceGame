@@ -9,6 +9,8 @@ uses
   RaceBet;
 
 type
+  PRaceBet = ^TRaceBet;
+  PMemo = ^TMemo;
 
   { THorsePlayerForm }
 
@@ -16,9 +18,10 @@ type
     BankrollLabel: TLabel;
     BankrollEdit: TEdit;
     BetsLabel: TLabel;
+    CancelBetsButton: TButton;
     ExactaCombo1: TComboBox;
     ExactaCombo2: TComboBox;
-    ClearBetsButton: TButton;
+    ResetBetsButton: TButton;
     ShowLabel: TLabel;
     QuinellaLabel: TLabel;
     ExactaLabel: TLabel;
@@ -38,13 +41,15 @@ type
     QuinellaCombo2: TComboBox;
     PlaceLabel: TLabel;
     BetPriceLabel: TLabel;
-    procedure ClearBetsButtonClick(Sender: TObject);
+    procedure CancelBetsButtonClick(Sender: TObject);
+    procedure ResetBetsButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PlaceBetsButtonClick(Sender: TObject);
+    procedure DisplayBets;
 
   private
     Bankroll: currency;
-    PlayerBets: TFPlist;
+    PlayerBetCollection: TCollection;
 
   public
 
@@ -64,11 +69,11 @@ implementation
     NameEdit.Text := ' ';
     Bankroll := 1000;
     BankrollEdit.Text := Format('%m', [Bankroll]);
-    PlayerBets := TFPList.Create;
+    PlayerBetCollection := TCollection.Create(TRaceBet);
     MemoBets.Lines.Clear;
   end;
 
-  procedure THorsePlayerForm.ClearBetsButtonClick(Sender: TObject);
+  procedure THorsePlayerForm.ResetBetsButtonClick(Sender: TObject);
   begin
     WinCombo.ItemIndex := -1;
     PlaceCombo.ItemIndex := -1;
@@ -85,50 +90,45 @@ implementation
     TrifectaCombo3.ItemIndex := -1;
   end;
 
+  procedure THorsePlayerForm.CancelBetsButtonClick(Sender: TObject);
+  begin
+    MemoBets.Lines.Clear;
+    Bankroll := Bankroll + (2 * PlayerBetCollection.Count);
+    BankrollEdit.Text := Format('%m', [Bankroll]);
+    PlayerBetCollection.Clear;
+  end;
+
   procedure THorsePlayerForm.PlaceBetsButtonClick(Sender: TObject);
   var
-    betsInfo: TStringList;
-    bet: TRaceBet;
+    {%H-}bet: TRaceBet;
   begin
-    betsInfo := TStringList.Create;
-
     if (WinCombo.ItemIndex > 0) then begin
-      bet := TRaceBet.Win(WinCombo.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Win(WinCombo.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
       WinCombo.ItemIndex := -1;
     end;
 
     if (PlaceCombo.ItemIndex > 0) then begin
-      bet := TRaceBet.Place(PlaceCombo.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Place(PlaceCombo.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
       PlaceCombo.ItemIndex := -1;
     end;
 
     if (ShowCombo.ItemIndex > 0) then begin
-      bet := TRaceBet.Show(ShowCombo.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Show(ShowCombo.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
       ShowCombo.ItemIndex := -1;
     end;
 
     if ((QuinellaCombo1.ItemIndex > 0) and (QuinellaCombo2.ItemIndex > 0) and
         (QuinellaCombo1.ItemIndex <> QuinellaCombo2.ItemIndex)) then begin
-      bet := TRaceBet.Quinella(QuinellaCombo1.ItemIndex, QuinellaCombo2.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Quinella(QuinellaCombo1.ItemIndex, QuinellaCombo2.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
     end;
 
     if ((ExactaCombo1.ItemIndex > 0) and (ExactaCombo2.ItemIndex > 0) and
         (ExactaCombo1.ItemIndex <> ExactaCombo2.ItemIndex)) then begin
-      bet := TRaceBet.Exacta(ExactaCombo1.ItemIndex, ExactaCombo2.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Exacta(ExactaCombo1.ItemIndex, ExactaCombo2.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
     end;
 
@@ -136,15 +136,24 @@ implementation
         (TrifectaCombo1.ItemIndex <> TrifectaCombo2.ItemIndex) and
         (TrifectaCombo1.ItemIndex <> TrifectaCombo3.ItemIndex) and
         (TrifectaCombo2.ItemIndex <> TrifectaCombo3.ItemIndex)) then begin
-      bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex);
-      PlayerBets.Add(bet);
-      betsInfo.Add(bet.FormatDisplayString());
+      bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex, PlayerBetCollection);
       Bankroll := Bankroll - 2;
     end;
 
-    MemoBets.Lines.AddStrings(betsInfo);
+    DisplayBets;
     BankrollEdit.Text := Format('%m', [Bankroll]);
   end;
 
+  procedure THorsePlayerForm.DisplayBets;
+  var
+    betItem: TCollectionItem;
+    bet: TRaceBet;
+  begin
+    MemoBets.Lines.Clear;
+    for betItem in PlayerBetCollection do begin
+      bet := TRaceBet(betItem);
+      MemoBets.Lines.Add(bet.FormatDisplayString);
+    end;
+  end;
 end.
 

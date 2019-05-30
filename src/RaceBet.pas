@@ -10,66 +10,85 @@ uses
 type
   TBetType = (WinBet, PlaceBet, ShowBet, QuinellaBet, ExactaBet, TrifectaBet);
 
-  TRaceBet = class(TPersistent)
+  TRaceBet = class(TCollectionItem)
     private
       fBetType: TBetType;
       fHorseNumber1: integer;
       fHorseNumber2: integer;
       fHorseNumber3: integer;
-    published
-      property BetType: TBetType read fBetType;
-      property HorseNumber1: integer read fHorseNumber1;
-      property HorseNumber2: integer read fHorseNumber2;
-      property HorseNumber3: integer read fHorseNumber3;
     public
-      constructor Win(horse: integer);
-      constructor Place(horse: integer);
-      constructor Show(horse: integer);
-      constructor Quinella(horse1: integer; horse2: integer);
-      constructor Exacta(horse1: integer; horse2: integer);
-      constructor Trifecta(horse1: integer; horse2: integer; horse3: integer);
+      class function Win(horse: integer; bets: TCollection): TRaceBet; static;
+      class function Place(horse: integer; bets: TCollection): TRaceBet; static;
+      class function Show(horse: integer; bets: TCollection): TRaceBet; static;
+      class function Quinella(horse1: integer; horse2: integer; bets: TCollection): TRaceBet; static;
+      class function Exacta(horse1: integer; horse2: integer; bets: TCollection): TRaceBet; static;
+      class function Trifecta(horse1: integer; horse2: integer; horse3: integer; bets: TCollection): TRaceBet;
       function FormatDisplayString(): string;
   end;
 
 implementation
-  constructor TRaceBet.Win(horse: integer);
+  class function TRaceBet.Win(horse: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := WinBet;
-    fHorseNumber1 := horse;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := WinBet;
+    bet.fHorseNumber1 := horse;
+    Result := bet;
   end;
 
-  constructor TRaceBet.Place(horse: integer);
+  class function TRaceBet.Place(horse: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := PlaceBet;
-    fHorseNumber1 := horse;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := PlaceBet;
+    bet.fHorseNumber1 := horse;
+    Result := bet;
   end;
 
-  constructor TRaceBet.Show(horse: integer);
+  class function TRaceBet.Show(horse: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := ShowBet;
-    fHorseNumber1 := horse;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := ShowBet;
+    bet.fHorseNumber1 := horse;
+    Result := bet;
   end;
 
-  constructor TRaceBet.Quinella(horse1: integer; horse2: integer);
+  class function TRaceBet.Quinella(horse1: integer; horse2: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := QuinellaBet;
-    fHorseNumber1 := horse1;
-    fHorseNumber2 := horse2;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := QuinellaBet;
+    bet.fHorseNumber1 := horse1;
+    bet.fHorseNumber2 := horse2;
+    Result := bet;
   end;
 
-  constructor TRaceBet.Exacta(horse1: integer; horse2: integer);
+  class function TRaceBet.Exacta(horse1: integer; horse2: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := ExactaBet;
-    fHorseNumber1 := horse1;
-    fHorseNumber2 := horse2;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := ExactaBet;
+    bet.fHorseNumber1 := horse1;
+    bet.fHorseNumber2 := horse2;
+    Result := bet;
   end;
 
-  constructor TRaceBet.Trifecta(horse1: integer; horse2: integer; horse3: integer);
+  class function TRaceBet.Trifecta(horse1: integer; horse2: integer; horse3: integer; bets: TCollection): TRaceBet;
+  var
+    bet: TRaceBet;
   begin
-    fBetType := TrifectaBet;
-    fHorseNumber1 := horse1;
-    fHorseNumber2 := horse2;
-    fHorseNumber3 := horse3;
+    bet := TRaceBet(bets.Add);
+    bet.fBetType := TrifectaBet;
+    bet.fHorseNumber1 := horse1;
+    bet.fHorseNumber2 := horse2;
+    bet.fHorseNumber3 := horse3;
+    Result := bet;
   end;
 
   function TRaceBet.FormatDisplayString(): string;

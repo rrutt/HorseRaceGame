@@ -144,6 +144,7 @@ implementation
     TheTrack.Paint;
 
     if (TheTrack.RaceOver) then begin
+      TheTrack.ComputePayoffInfo;
       LoadHorses.Enabled := True;
       ShowPayoffs.Enabled := True;
       ShowHorseOdds.Enabled := True;

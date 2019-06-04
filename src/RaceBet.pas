@@ -63,8 +63,13 @@ implementation
   begin
     bet := TRaceBet(bets.Add);
     bet.fBetType := QuinellaBet;
-    bet.fHorseNumber1 := horse1;
-    bet.fHorseNumber2 := horse2;
+    if (horse1 < horse2) then begin
+      bet.fHorseNumber1 := horse1;
+      bet.fHorseNumber2 := horse2;
+    end else begin
+      bet.fHorseNumber1 := horse2;
+      bet.fHorseNumber2 := horse1;
+    end;
     Result := bet;
   end;
 

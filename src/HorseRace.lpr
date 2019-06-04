@@ -12,8 +12,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
-  HorseRaceMainForm, HorsePlayerForm
-  ;
+  HorseRaceMainForm, HorsePlayerForm;
 
 begin
   Randomize;

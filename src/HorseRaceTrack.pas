@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, Controls, Graphics, LCLType,
   RaceHorse,
-  RaceHorsePopulation
+  RaceHorsePopulation,
+  RaceResults
   ;
 
 const
@@ -36,12 +37,14 @@ type
       RaceHorse: array[1..GATE_COUNT] of TRaceHorse;
       HorseOdds: array[1..GATE_COUNT] of integer;
       HorsePopulation: TRaceHorsePopulation;
+      TheResults: TRaceResults;
     public
       procedure Initialize;
       procedure LoadHorses;
       function GetHorseInfo: TStringList;
       function GetOddsInfo: TStringList;
       function GetPayoffInfo: TStringList;
+      procedure ComputePayoffInfo;
       procedure MoveHorses;
       procedure EraseBackground({%H-}DC: HDC); override;
       procedure Paint; override;
@@ -105,6 +108,8 @@ implementation
     FinishedHorseCount := 0;
     RaceHasStarted := false;
     RaceIsOver := false;
+
+    TheResults := TRaceResults.Create;
 
     //HorsePopulation := TRaceHorsePopulation.CreateFromResource;
     //HorsePopulation := TRaceHorsePopulation.CreateFromFile;
@@ -216,21 +221,80 @@ implementation
   function THorseRaceTrack.GetPayoffInfo: TStringList;
   var
     payoffInfo: TStringList;
-    i: integer;
-    horse: TRaceHorse;
     winHorse: TRaceHorse;
     placeHorse: TRaceHorse;
     showHorse: TRaceHorse;
+  begin;
+    payoffInfo := TStringList.Create;
+
+    payoffInfo.Add('$2 Payoffs');
+    payoffInfo.Add(' ');
+
+    winHorse := RaceHorse[TheResults.WinHorseIndex];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s (%d-1)',
+        [TheResults.WinHorseIndex, winHorse.Name, TheResults.WinHorseOdds]));
+    payoffInfo.Add(
+      Format(
+        '      Win %m  Place %m  Show %m',
+        [TheResults.WinHorsePayoffWin, TheResults.WinHorsePayoffPlace, TheResults.WinHorsePayoffShow]));
+
+    placeHorse := RaceHorse[TheResults.PlaceHorseIndex];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s (%d-1)',
+        [TheResults.PlaceHorseIndex, placeHorse.Name, TheResults.PlaceHorseOdds]));
+    payoffInfo.Add(
+      Format(
+        '                 Place %m  Show %m',
+        [TheResults.PlaceHorsePayoffPlace, TheResults.PlaceHorsePayoffShow]));
+
+    showHorse := RaceHorse[TheResults.ShowHorseIndex];
+    payoffInfo.Add(
+      Format(
+        '#%d  %s (%d-1)',
+        [TheResults.ShowHorseIndex, showHorse.Name, TheResults.ShowHorseOdds]));
+    payoffInfo.Add(
+      Format(
+        '                              Show %m',
+        [TheResults.ShowHorsePayoff]));
+
+    payoffInfo.Add(' ');
+
+    if (TheResults.WinHorseIndex < TheResults.PlaceHorseIndex) then begin
+      payoffInfo.Add(
+        Format(
+          '    Quinella %d/%d %m',
+          [TheResults.WinHorseIndex, TheResults.PlaceHorseIndex, TheResults.QuinellaPayoff]));
+    end else begin
+      payoffInfo.Add(
+        Format(
+          '    Quinella %d/%d %m',
+          [TheResults.PlaceHorseIndex, TheResults.WinHorseIndex, TheResults.QuinellaPayoff]));
+    end;
+
+    payoffInfo.Add(
+      Format(
+        '    Exacta %d/%d %m',
+        [TheResults.WinHorseIndex, TheResults.PlaceHorseIndex, TheResults.ExactaPayoff]));
+
+   payoffInfo.Add(
+      Format(
+        '    Trifecta %d/%d/%d %m',
+        [TheResults.WinHorseIndex, TheResults.PlaceHorseIndex, TheResults.ShowHorseIndex, TheResults.TrifectaPayoff]));
+
+    result := payoffInfo;
+  end;
+
+  procedure THorseRaceTrack.ComputePayoffInfo;
+  var
+    i: integer;
+    horse: TRaceHorse;
     finishIndex: integer;
     finishedHorseIndex: array [1..GATE_COUNT] of integer;
     finishedOdds: array [1..GATE_COUNT] of integer;
-    winPayoff: currency;
-    placePayoff: currency;
-    showPayoff: currency;
     exoticOdds: single;
-    exactaPayoff: currency;
-    quinellaPayoff: currency;
-    trifectaPayoff: currency;
   begin;
     for i := 1 to GATE_COUNT do begin
       horse := RaceHorse[i];
@@ -239,78 +303,29 @@ implementation
       finishedOdds[finishIndex] := HorseOdds[i];
     end;
 
-    payoffInfo := TStringList.Create;
+    TheResults.WinHorseIndex := finishedHorseIndex[1];
+    TheResults.WinHorseOdds:= finishedOdds[1];
+    TheResults.WinHorsePayoffWin := EnsureMinPayoff(finishedOdds[1]);
+    TheResults.WinHorsePayoffPlace := EnsureMinPayoff(finishedOdds[1] * 0.25);
+    TheResults.WinHorsePayoffShow := EnsureMinPayoff(finishedOdds[1] * 0.1);
 
-    payoffInfo.Add('$2 Payoffs');
-    payoffInfo.Add(' ');
+    TheResults.PlaceHorseIndex := finishedHorseIndex[2];
+    TheResults.PlaceHorseOdds:= finishedOdds[2];
+    TheResults.PlaceHorsePayoffPlace := EnsureMinPayoff(finishedOdds[2] * 0.25);
+    TheResults.PlaceHorsePayoffShow := EnsureMinPayoff(finishedOdds[2] * 0.1);
 
-    winHorse := RaceHorse[finishedHorseIndex[1]];
-    payoffInfo.Add(
-      Format(
-        '#%d  %s',
-        [finishedHorseIndex[1], winHorse.Name]));
-    winPayoff := EnsureMinPayoff(finishedOdds[1]);
-    placePayoff := EnsureMinPayoff(finishedOdds[1] * 0.25);
-    showPayoff := EnsureMinPayoff(finishedOdds[1] * 0.1);
-    payoffInfo.Add(
-      Format(
-        '      Win %m  Place %m  Show %m',
-        [winPayoff, placePayoff, showPayoff]));
-
-    placeHorse := RaceHorse[finishedHorseIndex[2]];
-    payoffInfo.Add(
-      Format(
-        '#%d  %s',
-        [finishedHorseIndex[2], placeHorse.Name]));
-    placePayoff := EnsureMinPayoff(finishedOdds[2] * 0.25);
-    showPayoff := EnsureMinPayoff(finishedOdds[2] * 0.1);
-    payoffInfo.Add(
-      Format(
-        '                 Place %m  Show %m',
-        [placePayoff, showPayoff]));
-
-    showHorse := RaceHorse[finishedHorseIndex[3]];
-    payoffInfo.Add(
-      Format(
-        '#%d  %s',
-        [finishedHorseIndex[3], showHorse.Name]));
-    showPayoff := EnsureMinPayoff(finishedOdds[3] * 0.1);
-    payoffInfo.Add(
-      Format(
-        '                              Show %m',
-        [showPayoff]));
-
-    payoffInfo.Add(' ');
+    TheResults.ShowHorseIndex := finishedHorseIndex[3];
+    TheResults.ShowHorseOdds:= finishedOdds[3];
+    TheResults.ShowHorsePayoff := EnsureMinPayoff(finishedOdds[3] * 0.1);
 
     exoticOdds := finishedOdds[1] * finishedOdds[2] * 0.8;
-    quinellaPayoff := EnsureMinPayoff(exoticOdds);
-    if (finishedHorseIndex[1] < finishedHorseIndex[2]) then begin
-      payoffInfo.Add(
-        Format(
-          '    Quinella %d/%d %m',
-          [finishedHorseIndex[1], finishedHorseIndex[2], quinellaPayoff]));
-    end else begin
-      payoffInfo.Add(
-        Format(
-          '    Quinella %d/%d %m',
-          [finishedHorseIndex[2], finishedHorseIndex[1], quinellaPayoff]));
-    end;
+    TheResults.QuinellaPayoff := EnsureMinPayoff(exoticOdds);
 
     exoticOdds := 2.0 * (finishedOdds[1] + (finishedOdds[2] * 0.8));
-    exactaPayoff := EnsureMinPayoff(exoticOdds);
-    payoffInfo.Add(
-      Format(
-        '    Exacta %d/%d %m',
-        [finishedHorseIndex[1], finishedHorseIndex[2], exactaPayoff]));
+    TheResults.ExactaPayoff := EnsureMinPayoff(exoticOdds);
 
     exoticOdds := 2.0 * (finishedOdds[1] + (finishedOdds[2] * 0.9) + (finishedOdds[3] * 0.8));
-    trifectaPayoff := EnsureMinPayoff(exoticOdds);
-    payoffInfo.Add(
-      Format(
-        '    Trifecta %d/%d/%d %m',
-        [finishedHorseIndex[1], finishedHorseIndex[2], finishedHorseIndex[3], trifectaPayoff]));
-
-    result := payoffInfo;
+    TheResults.TrifectaPayoff := EnsureMinPayoff(exoticOdds);
   end;
 
   procedure THorseRaceTrack.MoveHorses;
@@ -322,7 +337,7 @@ implementation
     for i := 1 to GATE_COUNT do begin
       RaceHorse[i].MoveHorse(FinishLine);
       if (RaceHorse[i].Position > FinishPosition) then begin
-        if (RaceHorse[i].FinishOrder  = 0) then begin
+        if (RaceHorse[i].FinishOrder = 0) then begin
           Inc(FinishedHorseCount);
           RaceHorse[i].FinishOrder := FinishedHorseCount;
           RaceIsOver := (FinishedHorseCount >= GATE_COUNT);

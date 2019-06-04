@@ -57,7 +57,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="7">
+    <Units Count="8">
       <Unit0>
         <Filename Value="HorseRace.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -92,6 +92,11 @@
         <Filename Value="RaceBet.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="raceresults.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RaceResults"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

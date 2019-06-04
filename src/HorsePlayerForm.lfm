@@ -44,6 +44,8 @@ object HorsePlayerForm: THorsePlayerForm
     Font.Name = 'Segoe UI'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnChange = NameEditChange
     ParentFont = False
     TabOrder = 0
     Text = 'NameEdit'
@@ -437,12 +439,12 @@ object HorsePlayerForm: THorsePlayerForm
     Style = csDropDownList
     TabOrder = 12
   end
-  object PlaceBetsButton: TButton
+  object ApplyBetsButton: TButton
     Left = 282
     Height = 25
     Top = 40
     Width = 152
-    Caption = 'Place Bets'
+    Caption = 'Apply Bet Selections'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -13
@@ -450,7 +452,7 @@ object HorsePlayerForm: THorsePlayerForm
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     Font.Style = [fsBold]
-    OnClick = PlaceBetsButtonClick
+    OnClick = ApplyBetsButtonClick
     ParentFont = False
     TabOrder = 13
   end
@@ -578,7 +580,7 @@ object HorsePlayerForm: THorsePlayerForm
     Height = 25
     Top = 8
     Width = 152
-    Caption = 'Reset Bets'
+    Caption = 'Reset Bet Selections'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -13
@@ -595,7 +597,7 @@ object HorsePlayerForm: THorsePlayerForm
     Height = 25
     Top = 72
     Width = 152
-    Caption = 'Cancel Bets'
+    Caption = 'Clear Bets'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack
     Font.Height = -13

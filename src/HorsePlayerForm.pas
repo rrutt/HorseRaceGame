@@ -10,9 +10,6 @@ uses
   RaceResults;
 
 type
-  PRaceBet = ^TRaceBet;
-  PMemo = ^TMemo;
-
   { THorsePlayerForm }
 
   THorsePlayerForm = class(TForm)
@@ -32,7 +29,7 @@ type
     TrifectaCombo1: TComboBox;
     TrifectaCombo2: TComboBox;
     TrifectaCombo3: TComboBox;
-    PlaceBetsButton: TButton;
+    ApplyBetsButton: TButton;
     WinCombo: TComboBox;
     MemoBets: TMemo;
     NameEdit: TEdit;
@@ -43,9 +40,10 @@ type
     PlaceLabel: TLabel;
     BetPriceLabel: TLabel;
     procedure CancelBetsButtonClick(Sender: TObject);
+    procedure NameEditChange(Sender: TObject);
     procedure ResetBetsButtonClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure PlaceBetsButtonClick(Sender: TObject);
+    procedure ApplyBetsButtonClick(Sender: TObject);
     procedure DisplayBets;
     procedure PayoffBets(TheRaceResults: TRaceResults);
 
@@ -90,14 +88,27 @@ implementation
   end;
 
   procedure THorsePlayerForm.CancelBetsButtonClick(Sender: TObject);
+  var
+    betItem: TCollectionItem;
+    bet: TRaceBet;
   begin
-    MemoBets.Lines.Clear;
-    Bankroll := Bankroll + (2 * PlayerBetCollection.Count);
+    for betItem in PlayerBetCollection do begin
+      bet := TRaceBet(betItem);
+      if (bet.Pending) then begin
+        Bankroll := Bankroll + 2.0;
+      end;
+    end;
     BankrollEdit.Text := Format('%m', [Bankroll]);
+    MemoBets.Lines.Clear;
     PlayerBetCollection.Clear;
   end;
 
-  procedure THorsePlayerForm.PlaceBetsButtonClick(Sender: TObject);
+procedure THorsePlayerForm.NameEditChange(Sender: TObject);
+begin
+  Self.Caption := Format('Horse Player: %s', [NameEdit.Text]);
+end;
+
+  procedure THorsePlayerForm.ApplyBetsButtonClick(Sender: TObject);
   var
     {%H-}bet: TRaceBet;
   begin
@@ -156,7 +167,18 @@ implementation
   end;
 
   procedure THorsePlayerForm.PayoffBets(TheRaceResults: TRaceResults);
+  var
+    betItem: TCollectionItem;
+    bet: TRaceBet;
+    betPayoff: currency;
   begin
+    for betItem in PlayerBetCollection do begin
+      bet := TRaceBet(betItem);
+      betPayoff := bet.ApplyRaceResults(TheRaceResults);
+      Bankroll := Bankroll + betPayoff;
+    end;
+    BankrollEdit.Text := Format('%m', [Bankroll]);
+    DisplayBets;
   end;
 end.
 

@@ -206,7 +206,7 @@ implementation
   var
     payoff: currency;
   begin
-    payoff := 2.0 * (1 + odds);
+    payoff := 2.0 * (1.0 + odds);
     if (payoff < 2.10) then begin
       payoff := 2.10;
     end;
@@ -251,7 +251,7 @@ implementation
         [finishedHorseIndex[1], winHorse.Name]));
     winPayoff := EnsureMinPayoff(finishedOdds[1]);
     placePayoff := EnsureMinPayoff(finishedOdds[1] * 0.25);
-    showPayoff := EnsureMinPayoff(finishedOdds[1] * 0.125);
+    showPayoff := EnsureMinPayoff(finishedOdds[1] * 0.1);
     payoffInfo.Add(
       Format(
         '      Win %m  Place %m  Show %m',
@@ -263,7 +263,7 @@ implementation
         '#%d  %s',
         [finishedHorseIndex[2], placeHorse.Name]));
     placePayoff := EnsureMinPayoff(finishedOdds[2] * 0.25);
-    showPayoff := EnsureMinPayoff(finishedOdds[2] * 0.125);
+    showPayoff := EnsureMinPayoff(finishedOdds[2] * 0.1);
     payoffInfo.Add(
       Format(
         '                 Place %m  Show %m',
@@ -274,7 +274,7 @@ implementation
       Format(
         '#%d  %s',
         [finishedHorseIndex[3], showHorse.Name]));
-    showPayoff := EnsureMinPayoff(finishedOdds[3] * 0.125);
+    showPayoff := EnsureMinPayoff(finishedOdds[3] * 0.1);
     payoffInfo.Add(
       Format(
         '                              Show %m',

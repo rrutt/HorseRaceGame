@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  RaceBet;
+  RaceBet,
+  RaceResults;
 
 type
   PRaceBet = ^TRaceBet;
@@ -46,6 +47,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure PlaceBetsButtonClick(Sender: TObject);
     procedure DisplayBets;
+    procedure PayoffBets(TheRaceResults: TRaceResults);
 
   private
     Bankroll: currency;
@@ -54,9 +56,6 @@ type
   public
 
   end;
-
-var
-  PlayerForm: THorsePlayerForm;
 
 implementation
 
@@ -154,6 +153,10 @@ implementation
       bet := TRaceBet(betItem);
       MemoBets.Lines.Add(bet.FormatDisplayString);
     end;
+  end;
+
+  procedure THorsePlayerForm.PayoffBets(TheRaceResults: TRaceResults);
+  begin
   end;
 end.
 

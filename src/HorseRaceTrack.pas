@@ -8,8 +8,7 @@ uses
   Classes, SysUtils, Controls, Graphics, LCLType,
   RaceHorse,
   RaceHorsePopulation,
-  RaceResults
-  ;
+  RaceResults;
 
 const
   GATE_COUNT = 10;
@@ -50,6 +49,7 @@ type
       procedure Paint; override;
       property RaceOver: boolean read RaceIsOver;
       property RaceDistance: integer read RaceDistanceInYards;
+      property ResultsAndPayoffs: TRaceResults read TheResults;
   end;
 
 implementation

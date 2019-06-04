@@ -93,9 +93,8 @@
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="raceresults.pas"/>
+        <Filename Value="RaceResults.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="RaceResults"/>
       </Unit7>
     </Units>
   </ProjectOptions>

@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  HorseRaceTrack;
+  HorseRaceTrack,
+  HorsePlayerForm;
 
 type
 
@@ -23,6 +24,7 @@ type
     LoadHorses: TButton;
     TimeMillisecondsLabel: TLabel;
     Timer1: TTimer;
+    ThePlayerForm: THorsePlayerForm;
 
     procedure FormCreate(Sender: TObject);
     procedure LoadHorsesClick(Sender: TObject);
@@ -89,6 +91,8 @@ implementation
     LoadHorses.Enabled := False;
     StartRace.Enabled := True;
     TimeMillisecondsLabel.Caption := '';
+
+    Application.CreateForm(THorsePlayerForm, ThePlayerForm);
   end;
 
   procedure THorseRaceMainForm.LoadHorsesClick(Sender: TObject);
@@ -145,6 +149,7 @@ implementation
 
     if (TheTrack.RaceOver) then begin
       TheTrack.ComputePayoffInfo;
+      ThePlayerForm.PayoffBets(TheTrack.ResultsAndPayoffs);
       LoadHorses.Enabled := True;
       ShowPayoffs.Enabled := True;
       ShowHorseOdds.Enabled := True;

@@ -609,4 +609,20 @@ object HorsePlayerForm: THorsePlayerForm
     ParentFont = False
     TabOrder = 15
   end
+  object TrifectaBox: TCheckBox
+    Left = 448
+    Height = 21
+    Top = 184
+    Width = 43
+    Caption = 'Box'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 16
+  end
 end

@@ -218,7 +218,7 @@ implementation
         if ((TheResults.WinHorseIndex = fHorseNumber1) and
             (TheResults.PlaceHorseIndex = fHorseNumber2) and
             (TheResults.ShowHorseIndex = fHorseNumber3)) then begin
-          fPayoff := TheResults.ExactaPayoff;
+          fPayoff := TheResults.TrifectaPayoff;
         end;
       end;
       Result := fPayoff;

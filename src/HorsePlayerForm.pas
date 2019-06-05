@@ -18,6 +18,7 @@ type
     BankrollEdit: TEdit;
     BetsLabel: TLabel;
     CancelBetsButton: TButton;
+    TrifectaBox: TCheckBox;
     ExactaCombo1: TComboBox;
     ExactaCombo2: TComboBox;
     ResetBetsButton: TButton;
@@ -92,6 +93,7 @@ implementation
     TrifectaCombo1.ItemIndex := -1;
     TrifectaCombo2.ItemIndex := -1;
     TrifectaCombo3.ItemIndex := -1;
+    TrifectaBox.Checked := false;
   end;
 
   procedure THorsePlayerForm.CancelBetsButtonClick(Sender: TObject);
@@ -153,8 +155,18 @@ end;
         (TrifectaCombo1.ItemIndex <> TrifectaCombo2.ItemIndex) and
         (TrifectaCombo1.ItemIndex <> TrifectaCombo3.ItemIndex) and
         (TrifectaCombo2.ItemIndex <> TrifectaCombo3.ItemIndex)) then begin
-      bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex, PlayerBetCollection);
-      Bankroll := Bankroll - 2;
+      if (TrifectaBox.Checked) then begin
+        bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex, PlayerBetCollection);
+        bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo3.ItemIndex, TrifectaCombo2.ItemIndex, PlayerBetCollection);
+        bet := TRaceBet.Trifecta(TrifectaCombo2.ItemIndex, TrifectaCombo1.ItemIndex, TrifectaCombo3.ItemIndex, PlayerBetCollection);
+        bet := TRaceBet.Trifecta(TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex, TrifectaCombo1.ItemIndex, PlayerBetCollection);
+        bet := TRaceBet.Trifecta(TrifectaCombo3.ItemIndex, TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, PlayerBetCollection);
+        bet := TRaceBet.Trifecta(TrifectaCombo3.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo1.ItemIndex, PlayerBetCollection);
+        Bankroll := Bankroll - 12;
+      end else begin
+        bet := TRaceBet.Trifecta(TrifectaCombo1.ItemIndex, TrifectaCombo2.ItemIndex, TrifectaCombo3.ItemIndex, PlayerBetCollection);
+        Bankroll := Bankroll - 2;
+      end;
     end;
 
     DisplayBets;

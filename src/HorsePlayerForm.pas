@@ -10,6 +10,7 @@ uses
   RaceResults;
 
 type
+
   { THorsePlayerForm }
 
   THorsePlayerForm = class(TForm)
@@ -53,6 +54,11 @@ type
 
   public
 
+  end;
+
+  THorsePlayerFormWrapper = class(TCollectionItem)
+    public
+      PlayerForm: THorsePlayerForm;
   end;
 
 implementation

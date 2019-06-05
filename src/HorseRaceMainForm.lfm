@@ -71,11 +71,11 @@ object HorseRaceMainForm: THorseRaceMainForm
     TabOrder = 3
   end
   object RaceDistanceLabel: TLabel
-    Left = 448
+    Left = 344
     Height = 21
     Top = 504
     Width = 129
-    Anchors = [akLeft, akBottom]
+    Anchors = [akRight, akBottom]
     Caption = 'RaceDistanceLabel'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack
@@ -135,6 +135,16 @@ object HorseRaceMainForm: THorseRaceMainForm
     ReadOnly = True
     TabOrder = 6
     WordWrap = False
+  end
+  object AddPlayer: TButton
+    Left = 496
+    Height = 25
+    Top = 504
+    Width = 91
+    Anchors = [akRight, akBottom]
+    Caption = 'Add Player'
+    OnClick = AddPlayerClick
+    TabOrder = 7
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

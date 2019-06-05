@@ -4,7 +4,7 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="11">
+    <Units Count="13">
       <Unit0>
         <Filename Value="HorseRace.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -18,9 +18,10 @@
         <ComponentName Value="HorseRaceMainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="124"/>
-        <CursorPos X="36" Y="156"/>
+        <TopLine Value="141"/>
+        <CursorPos X="37" Y="168"/>
         <UsageCount Value="232"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -57,10 +58,9 @@
         <ComponentName Value="HorsePlayerForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="75"/>
-        <CursorPos X="39" Y="105"/>
+        <TopLine Value="88"/>
+        <CursorPos Y="99"/>
         <UsageCount Value="261"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -69,8 +69,8 @@
         <Filename Value="RaceBet.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="12"/>
-        <CursorPos X="32" Y="30"/>
+        <TopLine Value="7"/>
+        <CursorPos X="72" Y="27"/>
         <UsageCount Value="256"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -80,14 +80,14 @@
         <EditorIndex Value="7"/>
         <TopLine Value="10"/>
         <CursorPos X="75" Y="38"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="D:\FreePascal\lazarus\fpc\3.0.4\source\rtl\objpas\classes\classesh.inc"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="464"/>
-        <CursorPos X="3" Y="482"/>
+        <TopLine Value="1752"/>
+        <CursorPos X="3" Y="1770"/>
         <UsageCount Value="10"/>
       </Unit8>
       <Unit9>
@@ -95,130 +95,154 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="185"/>
         <CursorPos X="21" Y="203"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
       </Unit9>
       <Unit10>
         <Filename Value="D:\FreePascal\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1829"/>
-        <CursorPos X="3" Y="1848"/>
+        <TopLine Value="137"/>
+        <CursorPos X="46" Y="155"/>
         <UsageCount Value="10"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="D:\FreePascal\lazarus\lcl\controls.pp"/>
+        <UnitName Value="Controls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1084"/>
+        <CursorPos X="33" Y="1102"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="D:\FreePascal\lazarus\lcl\lclclasses.pp"/>
+        <UnitName Value="LCLClasses"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="24"/>
+        <CursorPos X="35" Y="42"/>
+        <UsageCount Value="10"/>
+      </Unit12>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="89" Column="17" TopLine="59"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="168" Column="43" TopLine="139"/>
       </Position1>
       <Position2>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="101" Column="17" TopLine="71"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="169" Column="7" TopLine="140"/>
       </Position2>
       <Position3>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="111" Column="17" TopLine="81"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="166" Column="50" TopLine="141"/>
       </Position3>
       <Position4>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="154" Column="86" TopLine="131"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="160" Column="70" TopLine="141"/>
       </Position4>
       <Position5>
-        <Filename Value="HorsePlayerForm.pas"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret TopLine="7"/>
       </Position5>
       <Position6>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="19" Column="11"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="101" TopLine="80"/>
       </Position6>
       <Position7>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="42" Column="21" TopLine="12"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="99" TopLine="80"/>
       </Position7>
       <Position8>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="89" Column="36" TopLine="74"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="102" TopLine="83"/>
       </Position8>
       <Position9>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="164" TopLine="56"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="104" Column="22" TopLine="80"/>
       </Position9>
       <Position10>
-        <Filename Value="HorsePlayerForm.pas"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="94" Column="37" TopLine="80"/>
       </Position10>
       <Position11>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="19" Column="11"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="103" TopLine="80"/>
       </Position11>
       <Position12>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="42" Column="21" TopLine="12"/>
+        <Filename Value="RaceBet.pas"/>
+        <Caret Line="30" Column="32" TopLine="12"/>
       </Position12>
       <Position13>
         <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="98" TopLine="71"/>
+        <Caret Line="15" Column="34" TopLine="7"/>
       </Position13>
       <Position14>
         <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="172" Column="40" TopLine="139"/>
+        <Caret Line="62" TopLine="26"/>
       </Position14>
       <Position15>
         <Filename Value="HorsePlayerForm.pas"/>
+        <Caret Line="64" Column="80" TopLine="32"/>
       </Position15>
       <Position16>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="17" Column="17"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="101" Column="58" TopLine="84"/>
       </Position16>
       <Position17>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="67" Column="17" TopLine="37"/>
+        <Filename Value="RaceBet.pas"/>
+        <Caret Line="27" Column="72" TopLine="7"/>
       </Position17>
       <Position18>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="101" TopLine="70"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="102" Column="44" TopLine="83"/>
       </Position18>
       <Position19>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="205" Column="11" TopLine="61"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="101" Column="38" TopLine="84"/>
       </Position19>
       <Position20>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="30" Column="68"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="102" Column="72" TopLine="90"/>
       </Position20>
       <Position21>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="210" TopLine="175"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="103" Column="74" TopLine="85"/>
       </Position21>
       <Position22>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="96" Column="15" TopLine="78"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="102" Column="74" TopLine="85"/>
       </Position22>
       <Position23>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="210" TopLine="163"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="103" Column="74" TopLine="85"/>
       </Position23>
       <Position24>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="29"/>
+        <Filename Value="HorsePlayerForm.pas"/>
+        <Caret Line="62" TopLine="46"/>
       </Position24>
       <Position25>
-        <Filename Value="RaceBet.pas"/>
-        <Caret Line="30" Column="47" TopLine="12"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="105" Column="22" TopLine="87"/>
       </Position25>
       <Position26>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="51" Column="55" TopLine="23"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="104" TopLine="87"/>
       </Position26>
       <Position27>
-        <Filename Value="HorsePlayerForm.pas"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="102" Column="22" TopLine="84"/>
       </Position27>
       <Position28>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="32" Column="14" TopLine="2"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="98" TopLine="81"/>
       </Position28>
       <Position29>
-        <Filename Value="HorsePlayerForm.pas"/>
-        <Caret Line="45" Column="24" TopLine="15"/>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="153" Column="18" TopLine="141"/>
       </Position29>
+      <Position30>
+        <Filename Value="HorseRaceMainForm.pas"/>
+        <Caret Line="78" TopLine="64"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

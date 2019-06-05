@@ -20,12 +20,13 @@ type
     RaceDistanceLabel: TLabel;
     ShowHorseOdds: TButton;
     MemoHorseInfo: TMemo;
+    AddPlayer: TButton;
     StartRace: TButton;
     LoadHorses: TButton;
     TimeMillisecondsLabel: TLabel;
     Timer1: TTimer;
-    ThePlayerForm: THorsePlayerForm;
 
+    procedure AddPlayerClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LoadHorsesClick(Sender: TObject);
     procedure ShowHorseOddsClick(Sender: TObject);
@@ -37,6 +38,7 @@ type
 
   var
     MainForm: THorseRaceMainForm;
+    PlayerFormWrappers: TCollection;
 
 implementation
 
@@ -71,7 +73,9 @@ implementation
   end;
 
   procedure THorseRaceMainForm.FormCreate(Sender: TObject);
-  begin
+  var
+    PlayerFormWrapper: THorsePlayerFormWrapper;
+ begin
     TheTrack := THorseRaceTrack.Create(Self);
     TheTrack.Width := Self.Width;
     TheTrack.Top := 0;
@@ -92,7 +96,13 @@ implementation
     StartRace.Enabled := True;
     TimeMillisecondsLabel.Caption := '';
 
-    Application.CreateForm(THorsePlayerForm, ThePlayerForm);
+    PlayerFormWrappers := TCollection.Create(THorsePlayerFormWrapper);
+    PlayerFormWrapper := THorsePlayerFormWrapper(PlayerFormWrappers.Add);
+    Application.CreateForm(THorsePlayerForm, PlayerFormWrapper.PlayerForm);
+  end;
+
+  procedure THorseRaceMainForm.AddPlayerClick(Sender: TObject);
+  begin
   end;
 
   procedure THorseRaceMainForm.LoadHorsesClick(Sender: TObject);
@@ -139,6 +149,8 @@ implementation
   procedure THorseRaceMainForm.Timer1Timer(Sender: TObject);
   var
     TimeInSeconds: single;
+    Wrapper: TCollectionItem;
+    PlayerFormWrapper: THorsePlayerFormWrapper;
   begin
     TimeInMilliseconds += Timer1.Interval;
     TimeInSeconds := TimeInMilliseconds * 0.001;
@@ -149,7 +161,12 @@ implementation
 
     if (TheTrack.RaceOver) then begin
       TheTrack.ComputePayoffInfo;
-      ThePlayerForm.PayoffBets(TheTrack.ResultsAndPayoffs);
+
+      for Wrapper in PlayerFormWrappers do begin
+        PlayerFormWrapper := THorsePlayerFormWrapper(Wrapper);
+        PlayerFormWrapper.PlayerForm.PayoffBets(TheTrack.ResultsAndPayoffs);
+      end;
+
       LoadHorses.Enabled := True;
       ShowPayoffs.Enabled := True;
       ShowHorseOdds.Enabled := True;

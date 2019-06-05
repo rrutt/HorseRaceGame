@@ -72,10 +72,19 @@ implementation
     MemoHorseOdds.BringToFront;
   end;
 
-  procedure THorseRaceMainForm.FormCreate(Sender: TObject);
+  procedure AddNewPlayer;
   var
     PlayerFormWrapper: THorsePlayerFormWrapper;
- begin
+    PlayerName: string;
+  begin
+    PlayerFormWrapper := THorsePlayerFormWrapper(PlayerFormWrappers.Add);
+    Application.CreateForm(THorsePlayerForm, PlayerFormWrapper.PlayerForm);
+    PlayerName := Format('Player %d', [PlayerFormWrappers.Count]);
+    PlayerFormWrapper.PlayerForm.SetPlayerName(PlayerName);
+  end;
+
+  procedure THorseRaceMainForm.FormCreate(Sender: TObject);
+  begin
     TheTrack := THorseRaceTrack.Create(Self);
     TheTrack.Width := Self.Width;
     TheTrack.Top := 0;
@@ -97,12 +106,12 @@ implementation
     TimeMillisecondsLabel.Caption := '';
 
     PlayerFormWrappers := TCollection.Create(THorsePlayerFormWrapper);
-    PlayerFormWrapper := THorsePlayerFormWrapper(PlayerFormWrappers.Add);
-    Application.CreateForm(THorsePlayerForm, PlayerFormWrapper.PlayerForm);
+    AddNewPlayer;
   end;
 
   procedure THorseRaceMainForm.AddPlayerClick(Sender: TObject);
   begin
+    AddNewPlayer;
   end;
 
   procedure THorseRaceMainForm.LoadHorsesClick(Sender: TObject);

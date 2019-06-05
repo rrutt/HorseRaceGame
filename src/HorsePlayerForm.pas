@@ -47,6 +47,7 @@ type
     procedure ApplyBetsButtonClick(Sender: TObject);
     procedure DisplayBets;
     procedure PayoffBets(TheRaceResults: TRaceResults);
+    procedure SetPlayerName(PlayerName: string);
 
   private
     Bankroll: currency;
@@ -186,5 +187,11 @@ end;
     BankrollEdit.Text := Format('%m', [Bankroll]);
     DisplayBets;
   end;
+
+  procedure THorsePlayerForm.SetPlayerName(PlayerName: string);
+  begin
+    NameEdit.Text := PlayerName;
+  end;
+
 end.
 

@@ -202,8 +202,24 @@ implementation
           fPayoff := TheResults.ShowHorsePayoff;
         end;
       end else if (fBetType = QuinellaBet) then begin
+        if ((TheResults.WinHorseIndex = fHorseNumber1) and
+            (TheResults.PlaceHorseIndex = fHorseNumber2)) then begin
+          fPayoff := TheResults.QuinellaPayoff;
+        end else if ((TheResults.WinHorseIndex = fHorseNumber2) and
+            (TheResults.PlaceHorseIndex = fHorseNumber1)) then begin
+          fPayoff := TheResults.QuinellaPayoff;
+        end;
       end else if (fBetType = ExactaBet) then begin
+        if ((TheResults.WinHorseIndex = fHorseNumber1) and
+            (TheResults.PlaceHorseIndex = fHorseNumber2)) then begin
+          fPayoff := TheResults.ExactaPayoff;
+        end;
       end else if (fBetType = TrifectaBet) then begin
+        if ((TheResults.WinHorseIndex = fHorseNumber1) and
+            (TheResults.PlaceHorseIndex = fHorseNumber2) and
+            (TheResults.ShowHorseIndex = fHorseNumber3)) then begin
+          fPayoff := TheResults.ExactaPayoff;
+        end;
       end;
       Result := fPayoff;
     end else begin

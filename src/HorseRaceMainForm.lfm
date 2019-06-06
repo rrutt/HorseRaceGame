@@ -57,7 +57,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     )
     ParentFont = False
     ReadOnly = True
-    TabOrder = 2
+    TabOrder = 5
     WordWrap = False
   end
   object ShowHorseOdds: TButton
@@ -68,7 +68,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     Anchors = [akRight, akBottom]
     Caption = 'Show Horse Odds'
     OnClick = ShowHorseOddsClick
-    TabOrder = 3
+    TabOrder = 4
   end
   object RaceDistanceLabel: TLabel
     Left = 344
@@ -103,7 +103,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     )
     ParentFont = False
     ReadOnly = True
-    TabOrder = 4
+    TabOrder = 7
     WordWrap = False
   end
   object ShowPayoffs: TButton
@@ -114,7 +114,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     Anchors = [akRight, akBottom]
     Caption = 'Show Payoffs'
     OnClick = ShowPayoffsClick
-    TabOrder = 5
+    TabOrder = 3
   end
   object MemoPayoffs: TMemo
     Left = 104
@@ -144,7 +144,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     Anchors = [akRight, akBottom]
     Caption = 'Add Player'
     OnClick = AddPlayerClick
-    TabOrder = 7
+    TabOrder = 2
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

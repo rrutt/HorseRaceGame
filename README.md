@@ -8,10 +8,8 @@
 "Horse Race Game" is an open source software game that simulates a horse race track with the following features:
 
 - Simulated races along the lines of **[Sigma Derby](http://www.frontdesktip.com/1171/get-know-sigma-derby-gone/)** or **[Fortune Cup](http://www.frontdesktip.com/1418/fortune-cup-modernizes-horse-racing-games-casinos/)**.
-- Betting menu with simulated pari-mutuel odds.
-- Quarterhorse straight track racing initially.
-- Mixed-breed quarterhorse and thoroughbred straight track possibly added later.
-- Possibly add alternate surfaces (dirt track conditions, turf, wind, etc.)
+- Betting menu with simulated parimutuel odds.
+- Quarterhorse straight track racing.
 - Parameterized horse physiology functions:
   - Gate dwell time.
   - Initial acceleration.
@@ -20,45 +18,8 @@
   - Top speed endurance.
   - _Second wind_ time, speed, duration.
   - Deceleration rate and duration.
-- Possibly add _genetic encoding_ of horse physiology parameters with cross-breeding.
 
 ## Code Base
 
 Native executable program written in Free Pascal.
-
-### 2-D Graphics Approach
-
-- **Create a custom control which draws itself:** <http://wiki.freepascal.org/Developing_with_Graphics#Working_with_TLazIntfImage.2C_TRawImage_and_TLazCanvas>
-- **Include images files in executable:** <https://forum.lazarus.freepascal.org/index.php?topic=35848.0>
-
-### Useful software links
-
-- <https://en.wikipedia.org/wiki/Free_Pascal>
-- <https://www.freepascal.org/>
-- <http://www.lazarus-ide.org/>
-- <https://www.freepascal.org/faq.var>
-- <https://www.freepascal.org/docs.var>
-- <https://lazarus-ccr.sourceforge.io/fpcdoc/user/user.html>
-- <https://castle-engine.io/modern_pascal_introduction.html>
-- <http://newpascal.org/assets/modern_pascal_introduction.html>
-- <https://castle-engine.io/>
-- <http://www.zengl.org/>
-- <http://wiki.lazarus.freepascal.org/ZenGL>
-- <https://forum.lazarus.freepascal.org/index.php?topic=37363.15>
-- <https://forum.lazarus.freepascal.org/index.php?topic=41178.0>
-- <https://github.com/alrieckert/freepascal/blob/master/packages/libndsfpc/examples/graphics/Sprites/animate_simple/AnimateSimple.pp>
-- <http://andorra.sourceforge.net/index-2.html>
-- <http://andorra.sourceforge.net/index9d73.html?bb=tutot3eng>
-- <https://www.pascalgamedevelopment.com/forumdisplay.php?61-Andorra-2D>
-- <http://wiki.freepascal.org/Game_framework>
-- <http://wiki.freepascal.org/Game_Engine>
-- <http://wiki.freepascal.org/Developing_with_Graphics>
-- <http://wiki.freepascal.org/Graphics_libraries>
-- <https://www.pascalgamedevelopment.com/content.php>
-- <http://www.pascalgamer.com/>
-- <http://wiki.freepascal.org/fcl-json>
-- <https://stackoverflow.com/questions/12647236/using-freepascal-lazarus-json-libraries>
-- <http://forum.lazarus-ide.org/index.php?topic=14452.0>
-- <http://lazplanet.blogspot.com/2014/09/a-simple-json-parsing-example.html>
-- <https://news.ycombinator.com/item?id=15490345>
 

@@ -1,7 +1,10 @@
 # Horse Race Game
 
-
 **_TODO_**: Come up with snappy name involving "Downs" or "Park" or similar.
+
+- Digital Downs
+- Pascal Park
+
 
 ## Concept
 

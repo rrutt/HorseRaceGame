@@ -1,0 +1,153 @@
+object HorseRaceMainForm: THorseRaceMainForm
+  Left = 351
+  Height = 532
+  Top = 168
+  Width = 842
+  Caption = 'Horse Race'
+  ClientHeight = 532
+  ClientWidth = 842
+  OnCreate = FormCreate
+  LCLVersion = '2.0.0.4'
+  Visible = True
+  object TimeMillisecondsLabel: TLabel
+    Left = 232
+    Height = 21
+    Top = 504
+    Width = 157
+    Anchors = [akLeft, akBottom]
+    Caption = 'TimeMillisecondsLabel'
+    Font.Height = -16
+    ParentColor = False
+    ParentFont = False
+  end
+  object LoadHorses: TButton
+    Left = 8
+    Height = 25
+    Top = 504
+    Width = 96
+    Anchors = [akLeft, akBottom]
+    Caption = 'Load Horses'
+    OnClick = LoadHorsesClick
+    TabOrder = 0
+  end
+  object StartRace: TButton
+    Left = 112
+    Height = 25
+    Top = 504
+    Width = 96
+    Anchors = [akLeft, akBottom]
+    Caption = 'Start Race'
+    OnClick = StartRaceClick
+    TabOrder = 1
+  end
+  object MemoHorseInfo: TMemo
+    Left = 104
+    Height = 490
+    Top = 8
+    Width = 456
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -20
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoHorseInfo'
+    )
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 5
+    WordWrap = False
+  end
+  object ShowHorseOdds: TButton
+    Left = 704
+    Height = 25
+    Top = 504
+    Width = 112
+    Anchors = [akRight, akBottom]
+    Caption = 'Show Horse Odds'
+    OnClick = ShowHorseOddsClick
+    TabOrder = 4
+  end
+  object RaceDistanceLabel: TLabel
+    Left = 344
+    Height = 21
+    Top = 504
+    Width = 129
+    Anchors = [akRight, akBottom]
+    Caption = 'RaceDistanceLabel'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object MemoHorseOdds: TMemo
+    Left = 568
+    Height = 490
+    Top = 8
+    Width = 262
+    Anchors = [akTop, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -20
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoHorseOdds'
+    )
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 7
+    WordWrap = False
+  end
+  object ShowPayoffs: TButton
+    Left = 600
+    Height = 25
+    Top = 504
+    Width = 91
+    Anchors = [akRight, akBottom]
+    Caption = 'Show Payoffs'
+    OnClick = ShowPayoffsClick
+    TabOrder = 3
+  end
+  object MemoPayoffs: TMemo
+    Left = 104
+    Height = 304
+    Top = 40
+    Width = 456
+    Anchors = [akTop, akLeft, akRight]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -20
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoPayoffs'
+    )
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 6
+    WordWrap = False
+  end
+  object AddPlayer: TButton
+    Left = 496
+    Height = 25
+    Top = 504
+    Width = 91
+    Anchors = [akRight, akBottom]
+    Caption = 'Add Player'
+    OnClick = AddPlayerClick
+    TabOrder = 2
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    left = 8
+  end
+end

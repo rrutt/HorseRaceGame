@@ -1,0 +1,628 @@
+object HorsePlayerForm: THorsePlayerForm
+  Left = 1231
+  Height = 641
+  Top = 27
+  Width = 556
+  Caption = 'Horse Player'
+  ClientHeight = 641
+  ClientWidth = 556
+  Font.CharSet = ANSI_CHARSET
+  Font.Color = clBlack
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  Font.Style = [fsBold]
+  OnCreate = FormCreate
+  LCLVersion = '2.0.0.4'
+  Visible = True
+  object NameLabel: TLabel
+    Left = 16
+    Height = 21
+    Top = 24
+    Width = 46
+    Alignment = taRightJustify
+    Caption = 'Name'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object NameEdit: TEdit
+    Left = 88
+    Height = 29
+    Top = 24
+    Width = 129
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnChange = NameEditChange
+    ParentFont = False
+    TabOrder = 0
+    Text = 'NameEdit'
+  end
+  object MemoBets: TMemo
+    Left = 88
+    Height = 398
+    Top = 224
+    Width = 448
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -19
+    Font.Name = 'DejaVu Sans Mono'
+    Font.Pitch = fpFixed
+    Font.Quality = fqDraft
+    Lines.Strings = (
+      'MemoBets'
+    )
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 16
+  end
+  object BankrollLabel: TLabel
+    Left = 16
+    Height = 21
+    Top = 59
+    Width = 64
+    Alignment = taRightJustify
+    Caption = 'Bankroll'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object BankrollEdit: TEdit
+    Left = 88
+    Height = 29
+    Top = 59
+    Width = 129
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 1
+    Text = 'BankrollEdit'
+  end
+  object BetsLabel: TLabel
+    Left = 16
+    Height = 21
+    Top = 224
+    Width = 32
+    Caption = 'Bets'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object WinCombo: TComboBox
+    Left = 144
+    Height = 25
+    Top = 104
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 5
+  end
+  object PlaceCombo: TComboBox
+    Left = 144
+    Height = 25
+    Top = 144
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 6
+  end
+  object QuinellaCombo1: TComboBox
+    Left = 282
+    Height = 25
+    Top = 104
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 8
+  end
+  object QuinellaCombo2: TComboBox
+    Left = 338
+    Height = 25
+    Top = 104
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 9
+  end
+  object ExactaCombo1: TComboBox
+    Left = 282
+    Height = 25
+    Top = 144
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 10
+  end
+  object ExactaCombo2: TComboBox
+    Left = 338
+    Height = 25
+    Top = 144
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 11
+  end
+  object TrifectaCombo1: TComboBox
+    Left = 282
+    Height = 25
+    Top = 184
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 12
+  end
+  object TrifectaCombo2: TComboBox
+    Left = 338
+    Height = 25
+    Top = 184
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 13
+  end
+  object TrifectaCombo3: TComboBox
+    Left = 394
+    Height = 25
+    Top = 184
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 14
+  end
+  object ShowCombo: TComboBox
+    Left = 144
+    Height = 25
+    Top = 184
+    Width = 40
+    DropDownCount = 11
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ItemHeight = 17
+    ItemIndex = 0
+    Items.Strings = (
+      ''
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 7
+  end
+  object ApplyBetsButton: TButton
+    Left = 282
+    Height = 25
+    Top = 40
+    Width = 152
+    Caption = 'Apply Bet Selections'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnClick = ApplyBetsButtonClick
+    ParentFont = False
+    TabOrder = 3
+  end
+  object WinLabel: TLabel
+    Left = 95
+    Height = 21
+    Top = 104
+    Width = 31
+    Alignment = taRightJustify
+    Caption = 'Win'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object PlaceLabel: TLabel
+    Left = 85
+    Height = 21
+    Top = 144
+    Width = 41
+    Alignment = taRightJustify
+    Caption = 'Place'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object ShowLabel: TLabel
+    Left = 84
+    Height = 21
+    Top = 184
+    Width = 42
+    Alignment = taRightJustify
+    Caption = 'Show'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object QuinellaLabel: TLabel
+    Left = 200
+    Height = 21
+    Top = 104
+    Width = 65
+    Alignment = taRightJustify
+    Caption = 'Quinella'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object ExactaLabel: TLabel
+    Left = 215
+    Height = 21
+    Top = 144
+    Width = 50
+    Alignment = taRightJustify
+    Caption = 'Exacta'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object TrifectaLabel: TLabel
+    Left = 208
+    Height = 21
+    Top = 184
+    Width = 57
+    Alignment = taRightJustify
+    Caption = 'Trifecta'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object BetPriceLabel: TLabel
+    Left = 16
+    Height = 21
+    Top = 104
+    Width = 58
+    Alignment = taRightJustify
+    Caption = '$2 Bets:'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object ResetBetsButton: TButton
+    Left = 282
+    Height = 25
+    Top = 8
+    Width = 152
+    Caption = 'Reset Bet Selections'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnClick = ResetBetsButtonClick
+    ParentFont = False
+    TabOrder = 2
+  end
+  object CancelBetsButton: TButton
+    Left = 282
+    Height = 25
+    Top = 72
+    Width = 152
+    Caption = 'Clear Bets'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    OnClick = CancelBetsButtonClick
+    ParentFont = False
+    TabOrder = 4
+  end
+  object TrifectaBox: TCheckBox
+    Left = 448
+    Height = 21
+    Top = 184
+    Width = 43
+    Caption = 'Box'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 15
+  end
+end

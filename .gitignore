@@ -5,6 +5,6 @@ lib/
 *.exe
 *.res
 
-!Windows/*.exe
+!bin/*.exe
 
 src/HorsePopulation.data

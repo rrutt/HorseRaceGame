@@ -51,9 +51,9 @@ The Main Form contains these elements:
 The Horse Player Form contains these elements:
 
 - A **Name** text entry field that allows you to change the name of the player appears in the upper left of the form.  The name also appears in the title bar for the form.
-- a **Bankroll** display field that shows the current imaginary money available to the player.  This starts with $1,000 when the program is first started, or a new Horse Player Form is created with the **Add Player** button on the Main Form.
-- A set of drop-down selectors for each bet type appear in the middle of the form. 
-- A set of action buttons appear in the upper right of the form.
+- A **Bankroll** display field that shows the current imaginary money available to the player.  This starts with $1,000 when the program is first started, or a new Horse Player Form is created with the **Add Player** button on the Main Form.
+- A set of drop-down selectors for each bet type appears in the middle of the form. 
+- A set of action buttons appears in the upper right of the form.
 - A **Bets** log message box appears at the bottom of the form.
 
 ![Horse Player Form](img/HorsePlayerForm.png?raw=true "Horse Player Form")
@@ -67,7 +67,7 @@ After the race completes the Main Form appears similar to this:
 - The horses appear past the Finish Line, with the winning horse positioned farthest to the right.  The other horses appear positioned relative to the their finish order.
 - The full finish order of the race appears at the bottom of the track area, with the winning horse bet number to the left.
 
-Click the **Show Payoffs* button to seen the payoff prices for each kind of bet:
+Click the **Show Payoffs* button to see the payoff prices for each kind of bet:
 
 ![Show Payoffs](img/ShowPayoffs.png?raw=true "Show Payoffs")
 

@@ -67,11 +67,11 @@ After the race completes the Main Form appears similar to this:
 - The horses appear past the Finish Line, with the winning horse positioned farthest to the right.  The other horses appear positioned relative to the their finish order.
 - The full finish order of the race appears at the bottom of the track area, with the winning horse bet number to the left.
 
-Click the **Show Payoffs* button to see the payoff prices for each kind of bet:
+Click the **Show Payoffs** button to see the payoff prices for each kind of bet:
 
 ![Show Payoffs](img/ShowPayoffs.png?raw=true "Show Payoffs")
 
-Click the **Show Horse Odds" button to repeat the display of the odds for each horse:
+Click the **Show Horse Odds** button to repeat the display of the odds for each horse:
 
 ![Show Horse Odds](img/ShowHorseOdds.png?raw=true "Show Horse Odds")
 

@@ -19,7 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="64"/>
+        <TopLine Value="156"/>
         <CursorPos X="57" Y="66"/>
         <UsageCount Value="232"/>
         <Loaded Value="True"/>
@@ -29,7 +29,7 @@
         <Filename Value="HorseRaceTrack.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="94"/>
+        <TopLine Value="95"/>
         <CursorPos X="15" Y="112"/>
         <UsageCount Value="225"/>
         <Loaded Value="True"/>
@@ -38,7 +38,7 @@
         <Filename Value="RaceHorse.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="4"/>
+        <TopLine Value="156"/>
         <CursorPos X="30" Y="24"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
@@ -46,9 +46,10 @@
       <Unit4>
         <Filename Value="RaceHorsePopulation.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="49"/>
-        <CursorPos X="50" Y="79"/>
+        <TopLine Value="46"/>
+        <CursorPos X="29" Y="12"/>
         <UsageCount Value="207"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -77,9 +78,8 @@
       <Unit7>
         <Filename Value="RaceResults.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="10"/>
+        <TopLine Value="6"/>
         <CursorPos X="75" Y="38"/>
         <UsageCount Value="543"/>
         <Loaded Value="True"/>

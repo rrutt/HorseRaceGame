@@ -1,10 +1,10 @@
 object HorsePlayerForm: THorsePlayerForm
-  Left = 1231
-  Height = 641
-  Top = 27
+  Left = 409
+  Height = 492
+  Top = 28
   Width = 556
   Caption = 'Horse Player'
-  ClientHeight = 641
+  ClientHeight = 492
   ClientWidth = 556
   Font.CharSet = ANSI_CHARSET
   Font.Color = clBlack
@@ -52,7 +52,7 @@ object HorsePlayerForm: THorsePlayerForm
   end
   object MemoBets: TMemo
     Left = 88
-    Height = 398
+    Height = 249
     Top = 224
     Width = 448
     Anchors = [akTop, akLeft, akRight, akBottom]

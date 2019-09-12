@@ -9,7 +9,7 @@ uses
   RaceHorse;
 
 const
-  HORSE_POPULATION_SIZE = 50;
+  HORSE_POPULATION_SIZE = 54;
 
 type
   TRaceHorsePopulation = class(TPersistent)
@@ -70,11 +70,12 @@ implementation
       'Talk Like A Pirate',
       'Rickhouse Racer',
       'Lucky Louie',
-      'Diomand Mine',
+      'Diamond Mine',
       'Gold Dust Guy',
       'Black Widow',
       'Deadwood Dealer',
       'Woodstock Wanderer',
+      'Aisle Of White',
       'Restless Ridgling',
       'Finnicky Filly',
       'Pedal Steel Pony',
@@ -83,7 +84,10 @@ implementation
       'Femme Fatale',
       'Midnight Marauder',
       'Come Back Shane',
-      'OK Corral'
+      'OK Corral',
+      'Duncan Dough Nut',
+      'Phil M Noir',
+      'Endless Summer'
       );
 
   constructor TRaceHorsePopulation.CreateRandom(

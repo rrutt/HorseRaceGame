@@ -9,7 +9,7 @@ uses
   RaceHorse;
 
 const
-  HORSE_POPULATION_SIZE = 54;
+  HORSE_POPULATION_SIZE = 60;
 
 type
   TRaceHorsePopulation = class(TPersistent)
@@ -87,7 +87,13 @@ implementation
       'OK Corral',
       'Duncan Dough Nut',
       'Phil M Noir',
-      'Endless Summer'
+      'Endless Summer',
+      'Channel Won',
+      'Honeymooner',
+      'Southern Dancer',
+      'Goes To Eleven',
+      'Dynasty Diva',
+      'Rogue Agent'
       );
 
   constructor TRaceHorsePopulation.CreateRandom(

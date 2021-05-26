@@ -1,16 +1,16 @@
 object HorseRaceMainForm: THorseRaceMainForm
-  Left = 351
+  Left = 5
   Height = 532
-  Top = 168
+  Top = 70
   Width = 842
   Caption = 'Horse Race'
   ClientHeight = 532
   ClientWidth = 842
   OnCreate = FormCreate
-  LCLVersion = '2.0.0.4'
+  LCLVersion = '2.0.10.0'
   Visible = True
   object TimeMillisecondsLabel: TLabel
-    Left = 232
+    Left = 224
     Height = 21
     Top = 504
     Width = 157
@@ -61,17 +61,17 @@ object HorseRaceMainForm: THorseRaceMainForm
     WordWrap = False
   end
   object ShowHorseOdds: TButton
-    Left = 704
+    Left = 680
     Height = 25
     Top = 504
-    Width = 112
+    Width = 136
     Anchors = [akRight, akBottom]
     Caption = 'Show Horse Odds'
     OnClick = ShowHorseOddsClick
     TabOrder = 4
   end
   object RaceDistanceLabel: TLabel
-    Left = 344
+    Left = 328
     Height = 21
     Top = 504
     Width = 129
@@ -107,10 +107,10 @@ object HorseRaceMainForm: THorseRaceMainForm
     WordWrap = False
   end
   object ShowPayoffs: TButton
-    Left = 600
+    Left = 568
     Height = 25
     Top = 504
-    Width = 91
+    Width = 107
     Anchors = [akRight, akBottom]
     Caption = 'Show Payoffs'
     OnClick = ShowPayoffsClick
@@ -137,7 +137,7 @@ object HorseRaceMainForm: THorseRaceMainForm
     WordWrap = False
   end
   object AddPlayer: TButton
-    Left = 496
+    Left = 469
     Height = 25
     Top = 504
     Width = 91
@@ -148,6 +148,6 @@ object HorseRaceMainForm: THorseRaceMainForm
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    left = 8
+    Left = 8
   end
 end

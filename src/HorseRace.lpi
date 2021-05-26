@@ -41,7 +41,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="11"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="1"/>
       <CharSet Value="04E6"/>
       <StringTable Comments="MIT License.  https://opensource.org/licenses/MIT" CompanyName="Rick Rutt" FileDescription="Horse Race Game" LegalCopyright="Copyright 2019 Rick Rutt" ProductName="Horse Race Game"/>
     </VersionInfo>
@@ -114,6 +115,9 @@
       <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="False"/>
+      </Debugging>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>
